@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ApplicationIcon>Resources/Icons/icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <Folder Include="Resources/Icons" />
+    </ItemGroup>
+</Project>
