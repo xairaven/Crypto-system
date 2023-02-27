@@ -27,10 +27,7 @@ namespace Lab1.View
 
         private void About_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Author:\nTP-12, Kovalov Alex",
-                caption: "About", 
-                button: MessageBoxButton.OK,
-                icon: MessageBoxImage.Information);
+            new AboutWindow().Show();
         }
     }
 }
