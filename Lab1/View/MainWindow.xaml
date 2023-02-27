@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab1.View"
         mc:Ignorable="d"
-        Title="Crypto-system" Height="450" Width="800">
+        Title="Crypto-system" Width="600" Height="540">
         <Window.Resources>
                 <Style TargetType="local:MainWindow">
                         <Setter Property="Background" Value="#F0F0F0" />
@@ -15,21 +15,44 @@
                 <Style TargetType="Menu">
                         <Setter Property="Background" Value="White"></Setter>
                 </Style>
+                <Style x:Key="TransparentButton">
+                        <Setter Property="Control.Background" Value="Transparent"></Setter>
+                        <Setter Property="Control.BorderBrush" Value="Transparent"></Setter>
+                </Style>
+                
+                <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+                        <StackPanel Margin="-20,0,0,0" Background="#F0F0F0"/>
+                </ItemsPanelTemplate>
+                <Style TargetType="MenuItem">
+                        <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+                </Style>
         </Window.Resources>
         
-        <DockPanel>
+        <DockPanel x:Name="MainPanel">
                 <Menu DockPanel.Dock="Top">
                         <MenuItem Header="File">
                                 <MenuItem Header="New" />
                                 <MenuItem Header="Open" />
+                                <Separator/>
                                 <MenuItem Header="Save" />
                                 <MenuItem Header="Save as..." />
+                                <Separator/>
                                 <MenuItem Header="Exit" />
                         </MenuItem>
                         <MenuItem Header="About" Click="About_OnClick"/>
                 </Menu>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="25" Margin="5">
+                       <StackPanel Orientation="Horizontal">
+                               <Button x:Name="UndoButton" Style="{StaticResource TransparentButton}">
+                                        <Image Source="/Resources/Icons/UndoArrowIcon.png"/>
+                               </Button>
+                               <Button x:Name="RedoButton" Style="{StaticResource TransparentButton}">
+                                       <Image Source="/Resources/Icons/RedoArrowIcon.png"/>
+                               </Button> 
+                       </StackPanel>
+                </StackPanel>
                 <Grid Margin="1" Background="White">
-                        
+                     
                 </Grid>
         </DockPanel>
 </Window>

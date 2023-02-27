@@ -5,10 +5,11 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <NeutralLanguage>en</NeutralLanguage>
     </PropertyGroup>
 
     <PropertyGroup>
-        <ApplicationIcon>Resources/Icons/icon.ico</ApplicationIcon>
+        <ApplicationIcon>Resources/App/icon.ico</ApplicationIcon>
     </PropertyGroup>
     
     <ItemGroup>
@@ -21,5 +22,16 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Remove="Resources\Icons\RedoArrowIcon.png" />
+      <Resource Include="Resources\Icons\RedoArrowIcon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Icons\UndoArrowIcon.png" />
+      <Resource Include="Resources\Icons\UndoArrowIcon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>
