@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Lab1
+namespace Lab1.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,14 @@ namespace Lab1
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void About_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Author:\nTP-12, Kovalov Alex",
+                caption: "About", 
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Information);
         }
     }
 }
