@@ -45,5 +45,21 @@ namespace Lab1.View
                 CipherFrame.Content = _pages[(int) list.SelectedItem];
             }
         }
+
+        private void UndoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (MainTextArea.CanUndo)
+            {
+                MainTextArea.Undo();
+            }
+        }
+
+        private void RedoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (MainTextArea.CanRedo)
+            {
+                MainTextArea.Redo();
+            }
+        }
     }
 }

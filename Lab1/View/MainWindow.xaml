@@ -69,10 +69,12 @@
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="25" Margin="5">
                        <StackPanel Orientation="Horizontal">
-                               <Button x:Name="UndoButton" Style="{StaticResource TransparentButton}">
+                               <Button Style="{StaticResource TransparentButton}"
+                                       Click="UndoButton_OnClick">
                                         <Image Source="/Resources/Icons/UndoArrowIcon.png"/>
                                </Button>
-                               <Button x:Name="RedoButton" Style="{StaticResource TransparentButton}">
+                               <Button Style="{StaticResource TransparentButton}"
+                                       Click="RedoButton_OnClick">
                                        <Image Source="/Resources/Icons/RedoArrowIcon.png"/>
                                </Button> 
                        </StackPanel>
@@ -114,8 +116,10 @@
                         
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}" />
-                <Grid>
-                        <RichTextBox Margin="2" />
+                <Grid Background="#F0F0F0">
+                        <RichTextBox 
+                                x:Name="MainTextArea"
+                                Margin="2" />
                 </Grid>
         </DockPanel>
 </Window>
