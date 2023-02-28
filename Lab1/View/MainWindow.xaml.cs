@@ -1,65 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Lab1.Model;
 
-namespace Lab1.View
+namespace Lab1.View;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private readonly List<Page> _pages;
+    private FileInfo? _fileInfo;
+
+    public MainWindow()
     {
-        private readonly List<Page> _pages;
+        InitializeComponent();
+
+        _pages = new List<Page>()
+        {
+            new CaesarPage(),
+            new Base64Page(),
+            new TrithemiusPage()
+        };
+    }
+
+    private void About_OnClick(object sender, RoutedEventArgs e)
+    {
+        new AboutWindow().Show();
+    }
+
+    private void CipherChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ComboBox list)
+        {
+            CipherFrame.Content = _pages[(int)list.SelectedItem];
+        }
+    }
+
+    private void UndoButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (MainTextArea.CanUndo)
+        {
+            MainTextArea.Undo();
+        }
+    }
+
+    private void RedoButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (MainTextArea.CanRedo)
+        {
+            MainTextArea.Redo();
+        }
+    }
+    
+    private void NewFile_OnClick(object sender, RoutedEventArgs e)
+    {
+        _fileInfo = null;
+        MainTextArea.Text = "";
+        DisableStatusBar();
+    }
+    
+    private void CloseFile_OnClick(object sender, RoutedEventArgs e)
+    {
+        NewFile_OnClick(sender, e);
+    }
+
+    private void OpenFile_OnClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            _fileInfo = new FileController().Open();
+        }
+        catch (Exception)
+        {
+            return;
+        }
+
+        MainTextArea.Text = File.ReadAllText(_fileInfo.FullName);
         
-        public MainWindow()
+        if (!StatusBar.IsEnabled)
         {
-            InitializeComponent();
-
-            _pages = new List<Page>()
-            {
-                new CaesarPage(),
-                new Base64Page()
-            };
+            EnableStatusBar(_fileInfo.FullName);
         }
+    }
 
-        private void About_OnClick(object sender, RoutedEventArgs e)
-        {
-            new AboutWindow().Show();
-        }
+    private void EnableStatusBar(string fileName)
+    {
+        StatusBar.Text = fileName;
+        StatusBar.IsEnabled = true;
+        StatusBarState.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/CheckMark.png"));
+    }
 
-        private void CipherChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is ComboBox list)
-            {
-                CipherFrame.Content = _pages[(int) list.SelectedItem];
-            }
-        }
+    private void DisableStatusBar()
+    {
+        StatusBar.Text = "";
+        StatusBar.IsEnabled = false;
+        StatusBarState.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/CrossMark.png"));
+    }
 
-        private void UndoButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (MainTextArea.CanUndo)
-            {
-                MainTextArea.Undo();
-            }
-        }
+    private void SaveFile_OnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 
-        private void RedoButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (MainTextArea.CanRedo)
-            {
-                MainTextArea.Redo();
-            }
-        }
+    private void SaveAsFile_OnClick(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+    
+    private void Exit_OnClick(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

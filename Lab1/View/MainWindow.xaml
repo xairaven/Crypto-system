@@ -30,6 +30,12 @@
                         <Setter Property="Button.BorderBrush" Value="Transparent" />
                 </Style>
                 
+                <Style x:Key="CryptButtons">
+                        <Setter Property="Button.Background" Value="Transparent" />
+                        <Setter Property="Button.BorderBrush" Value="Black" />
+                        <Setter Property="Border.CornerRadius" Value="7" />
+                </Style>
+                
                 <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
                         <StackPanel Margin="-20,0,0,0" Background="#F0F0F0"/>
                 </ItemsPanelTemplate>
@@ -43,6 +49,7 @@
                         <Setter Property="TextBox.Margin" Value="5, 0,0,0" />
                         <Setter Property="TextBox.MinWidth" Value="490"/>
                         <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="TextBox.IsEnabled" Value="False" />
                 </Style>
                 
                 <ObjectDataProvider x:Key="CypherList" MethodName="GetValues"
@@ -56,13 +63,14 @@
         <DockPanel>
                 <Menu DockPanel.Dock="Top">
                         <MenuItem Header="File">
-                                <MenuItem Header="New" />
-                                <MenuItem Header="Open" />
+                                <MenuItem Header="New" Click="NewFile_OnClick"/>
+                                <MenuItem Header="Open" Click="OpenFile_OnClick" />
+                                <MenuItem Header="Close" Click="CloseFile_OnClick" />
                                 <Separator />
-                                <MenuItem Header="Save" />
-                                <MenuItem Header="Save as..." />
+                                <MenuItem Header="Save" Click="SaveFile_OnClick" />
+                                <MenuItem Header="Save as..." Click="SaveAsFile_OnClick"/>
                                 <Separator />
-                                <MenuItem Header="Exit" />
+                                <MenuItem Header="Exit" Click="Exit_OnClick" />
                         </MenuItem>
                         <MenuItem Header="About" Click="About_OnClick"/>
                 </Menu>
@@ -78,15 +86,13 @@
                                        <Image Source="/Resources/Icons/RedoArrowIcon.png"/>
                                </Button> 
                        </StackPanel>
-                        <TextBox x:Name="StatusBar" Style="{StaticResource FileBar}">
-                                C://Drive/Folder/AnotherFolder/file.txt
-                        </TextBox>
+                        <TextBox x:Name="StatusBar" Style="{StaticResource FileBar}" />
                         <Border
                                 BorderThickness="1"
                                 Margin="5, 0, 0, 0"
                                 BorderBrush='DarkGray'>
                                 
-                                <Image Source="/Resources/Icons/CrossMark.png" />
+                                <Image x:Name="StatusBarState" Source="/Resources/Icons/CrossMark.png" />
                         </Border>
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
@@ -98,7 +104,7 @@
                                         FontSize="16"
                                         TextAlignment="Center"
                                         Margin="5">
-                                        Cyphers:
+                                        Ciphers:
                                 </TextBlock>
                                 <ComboBox 
                                         ItemsSource="{Binding Source={StaticResource CypherList}}"
@@ -110,17 +116,17 @@
                         </StackPanel>
                         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
                         <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                <Button>
+                                <Button Style="{StaticResource TransparentButton}">
                                         <StackPanel>
                                                 <Image 
                                                         Source="/Resources/Icons/Encryption.png"
                                                         Width="32"/>
                 
-                                                <Label Content="Encrypt" FontWeight="SemiBold"/>
+                                                <Label Content="Encrypt" FontWeight="SemiBold" />
                                         </StackPanel>
                                 </Button>
         
-                                <Button>
+                                <Button Style="{StaticResource TransparentButton}">
                                         <StackPanel>
                                                 <Image 
                                                         Source="/Resources/Icons/Decryption.png"
@@ -139,7 +145,7 @@
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}" />
                 <Grid Background="#F0F0F0">
-                        <RichTextBox 
+                        <TextBox 
                                 x:Name="MainTextArea"
                                 Margin="2" />
                 </Grid>
