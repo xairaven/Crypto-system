@@ -1,45 +1,61 @@
 ﻿using System;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using Microsoft.Win32;
 
 namespace Lab1.Model;
 
 public class FileController : IFileController
 {
-    public bool New()
-    {
-        
-        return true;
-    }
-
     public FileInfo Open()
     {
-        var file = new OpenFileDialog()
+        var openDialog = new OpenFileDialog()
         {
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments),
             Filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*"
         };
 
-        if (!file.ShowDialog() == true)
+        if (!openDialog.ShowDialog() == true)
         {
             throw new FileLoadException("Error occured! File was not open.");
         }
         
-        return new FileInfo(file.FileName);
+        return new FileInfo(openDialog.FileName);
     }
 
-    public bool Save()
+    public FileInfo Open(FileInfo fileInfo)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
-    public bool SaveAs()
+    public void Save(FileInfo fileInfo, string text)
     {
-        throw new System.NotImplementedException();
+        if (text.Trim().Equals("")) return;
+
+        var textInFile = File.ReadAllText(fileInfo.FullName);
+        if (!text.Equals(textInFile))
+        {
+            File.WriteAllText(fileInfo.FullName, text);
+        }
     }
 
-    public bool Print()
+    public FileInfo SaveAs(string text)
     {
-        throw new System.NotImplementedException();
+        var saveDialog = new SaveFileDialog()
+        {
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments),
+            Filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*"
+        };
+        
+        if (!saveDialog.ShowDialog() == true)
+        {
+            throw new FileLoadException("Error occured! Dialog closed.");
+        }
+        
+        File.WriteAllText(saveDialog.FileName, text);
+
+        return new FileInfo(saveDialog.FileName);
     }
 }

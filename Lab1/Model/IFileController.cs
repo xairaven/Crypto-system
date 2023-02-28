@@ -1,12 +1,13 @@
 ﻿using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Lab1.Model;
 
 public interface IFileController
 {
-    bool New();
     FileInfo Open();
-    bool Save();
-    bool SaveAs();
-    bool Print();
+    void Save(FileInfo fileInfo, string textBox);
+    FileInfo SaveAs(string text);
 }

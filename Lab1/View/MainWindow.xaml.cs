@@ -82,34 +82,54 @@ public partial class MainWindow : Window
 
         MainTextArea.Text = File.ReadAllText(_fileInfo.FullName);
         
-        if (!StatusBar.IsEnabled)
-        {
-            EnableStatusBar(_fileInfo.FullName);
-        }
+        EnableStatusBar(_fileInfo.FullName);
     }
 
     private void EnableStatusBar(string fileName)
     {
         StatusBar.Text = fileName;
         StatusBar.IsEnabled = true;
-        StatusBarState.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/CheckMark.png"));
+        StatusBarState.Source = new BitmapImage(
+            new Uri("pack://application:,,,/Resources/Icons/CheckMark.png"));
     }
 
     private void DisableStatusBar()
     {
         StatusBar.Text = "";
         StatusBar.IsEnabled = false;
-        StatusBarState.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/CrossMark.png"));
+        StatusBarState.Source = new BitmapImage(
+            new Uri("pack://application:,,,/Resources/Icons/CrossMark.png"));
     }
 
     private void SaveFile_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        if (_fileInfo == null)
+        {
+            try
+            {
+               _fileInfo = new FileController().SaveAs(MainTextArea.Text);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            EnableStatusBar(_fileInfo.FullName);
+            return;
+        }
+
+        new FileController().Save(_fileInfo, MainTextArea.Text);
     }
 
     private void SaveAsFile_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        try
+        {
+            new FileController().SaveAs(MainTextArea.Text);
+        }
+        catch (Exception)
+        {
+            return;
+        }
     }
     
     private void Exit_OnClick(object sender, RoutedEventArgs e)
