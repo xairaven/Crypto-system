@@ -109,6 +109,28 @@
                                         />
                         </StackPanel>
                         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+                        <StackPanel Orientation="Horizontal" Margin="5, 0">
+                                <Button>
+                                        <StackPanel>
+                                                <Image 
+                                                        Source="/Resources/Icons/Encryption.png"
+                                                        Width="32"/>
+                
+                                                <Label Content="Encrypt" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                </Button>
+        
+                                <Button>
+                                        <StackPanel>
+                                                <Image 
+                                                        Source="/Resources/Icons/Decryption.png"
+                                                        Width="32"/>
+                
+                                                <Label Content="Decrypt" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                </Button>
+                        </StackPanel>
+                        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
                         <StackPanel>
                                 <Frame x:Name="CipherFrame" 
                                        NavigationUIVisibility="Hidden"/>
