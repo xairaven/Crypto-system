@@ -45,5 +45,13 @@
       <Resource Include="Resources\Icons\CrossMark.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\Decryption.png" />
+      <Resource Include="Resources\Icons\Decryption.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Icons\Encryption.png" />
+      <Resource Include="Resources\Icons\Encryption.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>

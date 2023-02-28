@@ -100,7 +100,6 @@
                                 </TextBlock>
                                 <ComboBox 
                                         ItemsSource="{Binding Source={StaticResource CypherList}}"
-                                        
                                         Margin="5"
                                         Width="150"
                                 
@@ -115,8 +114,8 @@
                         
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}" />
-                <StackPanel >
-                        
-                </StackPanel>
+                <Grid>
+                        <RichTextBox Margin="2" />
+                </Grid>
         </DockPanel>
 </Window>

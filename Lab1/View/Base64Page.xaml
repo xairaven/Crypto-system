@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Lab1.View"
       mc:Ignorable="d"
-      Title="Base64Page" Height="70" Width="500">
+      Title="Base64Page" Height="70" Width="400">
     <Grid>
         <Label>This is the Base64 Page!</Label>
     </Grid>

@@ -5,8 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Lab1.View"
       mc:Ignorable="d"
-      Title="CaesarPage" Height="70" Width="500">
-    <Grid>
-        <Label>This is the Caesar Page!</Label>
-    </Grid>
+      Title="CaesarPage" Height="70" Width="400">
+    <Page.Resources>
+        
+    </Page.Resources>
+    <StackPanel Orientation="Horizontal" Margin="5, 0">
+        <Button>
+            <StackPanel>
+                <Image 
+                    Source="/Resources/Icons/Encryption.png"
+                    Width="32"/>
+                
+                <Label Content="Encrypt" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Button>
+        
+        <Button>
+            <StackPanel>
+                <Image 
+                    Source="/Resources/Icons/Decryption.png"
+                    Width="32"/>
+                
+                <Label Content="Decrypt" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Button>
+        
+        <DockPanel Margin="10, 0">
+            <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key:"/>
+            <TextBox MinWidth="250" DockPanel.Dock="Bottom" Margin="5"/>
+        </DockPanel>
+    </StackPanel>
 </Page>
