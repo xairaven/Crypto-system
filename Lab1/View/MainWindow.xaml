@@ -3,22 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:cryptography="clr-namespace:Lab1.Cryptography"
         xmlns:local="clr-namespace:Lab1.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Crypto-system" Width="600" Height="540">
+        Title="Crypto-system" Width="600" Height="450">
         <Window.Resources>
                 <Style TargetType="local:MainWindow">
-                        <Setter Property="Background" Value="#F0F0F0" />
                         <Setter Property="MinHeight" Value="450"/>
-                        <Setter Property="MinWidth" Value="800"/>
+                        <Setter Property="MinWidth" Value="600"/>
+                        <Setter Property="MaxWidth" Value="600"></Setter>
                 </Style>
                 <Style TargetType="Menu">
                         <Setter Property="Background" Value="White"></Setter>
                 </Style>
+                
+                <Style x:Key="InterfaceSeparator">
+                        <Setter Property="DockPanel.Dock" Value="Top"></Setter>
+                        <Setter Property="Separator.BorderBrush" Value="DarkGray"></Setter>
+                        <Setter Property="Separator.BorderThickness" Value="0.5"></Setter>
+                </Style>
+                
                 <Style x:Key="TransparentButton">
-                        <Setter Property="Control.Background" Value="Transparent"></Setter>
-                        <Setter Property="Control.BorderBrush" Value="Transparent"></Setter>
+                        <Setter Property="Button.Background" Value="Transparent" />
+                        <Setter Property="Button.BorderBrush" Value="Transparent" />
                 </Style>
                 
                 <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
@@ -27,21 +36,37 @@
                 <Style TargetType="MenuItem">
                         <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
                 </Style>
+                
+                <Style x:Key="FileBar">
+                        <Setter Property="TextBox.Background" Value="#F0F0F0" />
+                        <Setter Property="TextBox.IsReadOnly" Value="True"/> 
+                        <Setter Property="TextBox.Margin" Value="5, 0,0,0" />
+                        <Setter Property="TextBox.MinWidth" Value="490"/>
+                        <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
+                </Style>
+                
+                <ObjectDataProvider x:Key="CypherList" MethodName="GetValues"
+                                    ObjectType="{x:Type system:Enum}">
+                        <ObjectDataProvider.MethodParameters>
+                                <x:Type TypeName="cryptography:CipherEnum"/>
+                        </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
         </Window.Resources>
         
-        <DockPanel x:Name="MainPanel">
+        <DockPanel>
                 <Menu DockPanel.Dock="Top">
                         <MenuItem Header="File">
                                 <MenuItem Header="New" />
                                 <MenuItem Header="Open" />
-                                <Separator/>
+                                <Separator />
                                 <MenuItem Header="Save" />
                                 <MenuItem Header="Save as..." />
-                                <Separator/>
+                                <Separator />
                                 <MenuItem Header="Exit" />
                         </MenuItem>
                         <MenuItem Header="About" Click="About_OnClick"/>
                 </Menu>
+                <Separator Style="{StaticResource InterfaceSeparator}"/>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="25" Margin="5">
                        <StackPanel Orientation="Horizontal">
                                <Button x:Name="UndoButton" Style="{StaticResource TransparentButton}">
@@ -51,12 +76,45 @@
                                        <Image Source="/Resources/Icons/RedoArrowIcon.png"/>
                                </Button> 
                        </StackPanel>
-                        <TextBlock x:Name="StatusBar">
+                        <TextBox x:Name="StatusBar" Style="{StaticResource FileBar}">
+                                C://Drive/Folder/AnotherFolder/file.txt
+                        </TextBox>
+                        <Border
+                                BorderThickness="1"
+                                Margin="5, 0, 0, 0"
+                                BorderBrush='DarkGray'>
                                 
-                        </TextBlock>
+                                <Image Source="/Resources/Icons/CrossMark.png" />
+                        </Border>
                 </StackPanel>
-                <Grid Margin="1" Background="White">
-                     
-                </Grid>
+                <Separator Style="{StaticResource InterfaceSeparator}"/>
+                
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                        <StackPanel Margin="10,0">
+                                <TextBlock 
+                                        FontWeight="SemiBold"
+                                        FontSize="16"
+                                        TextAlignment="Center"
+                                        Margin="5">
+                                        Cyphers:
+                                </TextBlock>
+                                <ComboBox 
+                                        ItemsSource="{Binding Source={StaticResource CypherList}}"
+                                        Margin="5"
+                                        Width="150"
+                                        />
+                        </StackPanel>
+                        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+                        <StackPanel>
+                                <TextBlock>sss</TextBlock>
+                        </StackPanel>
+                        <Frame>
+                                
+                        </Frame>
+                </StackPanel>
+                <Separator Style="{StaticResource InterfaceSeparator}" />
+                <StackPanel >
+                        
+                </StackPanel>
         </DockPanel>
 </Window>

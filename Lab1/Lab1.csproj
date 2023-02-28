@@ -37,5 +37,13 @@
       <Resource Include="Resources\Pictures\KPISmallLogo.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\CheckMark.png" />
+      <Resource Include="Resources\Icons\CheckMark.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Icons\CrossMark.png" />
+      <Resource Include="Resources\Icons\CrossMark.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>
