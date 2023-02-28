@@ -89,7 +89,7 @@
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
                 
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="70">
                         <StackPanel Margin="10,0">
                                 <TextBlock 
                                         FontWeight="SemiBold"
@@ -100,17 +100,19 @@
                                 </TextBlock>
                                 <ComboBox 
                                         ItemsSource="{Binding Source={StaticResource CypherList}}"
+                                        
                                         Margin="5"
                                         Width="150"
+                                
+                                        SelectionChanged="CipherChanged"
                                         />
                         </StackPanel>
                         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
                         <StackPanel>
-                                <TextBlock>sss</TextBlock>
+                                <Frame x:Name="CipherFrame" 
+                                       NavigationUIVisibility="Hidden"/>
                         </StackPanel>
-                        <Frame>
-                                
-                        </Frame>
+                        
                 </StackPanel>
                 <Separator Style="{StaticResource InterfaceSeparator}" />
                 <StackPanel >
