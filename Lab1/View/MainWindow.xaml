@@ -108,6 +108,7 @@
                                 </TextBlock>
                                 <ComboBox 
                                         ItemsSource="{Binding Source={StaticResource CypherList}}"
+                                        x:Name="CipherCombo"
                                         Margin="5"
                                         Width="150"
                                 
@@ -116,7 +117,9 @@
                         </StackPanel>
                         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
                         <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                <Button Style="{StaticResource TransparentButton}">
+                                <Button Style="{StaticResource TransparentButton}"
+                                        x:Name="EncryptButton"
+                                        Click="HandleCoding">
                                         <StackPanel>
                                                 <Image 
                                                         Source="/Resources/Icons/Encryption.png"
@@ -126,7 +129,9 @@
                                         </StackPanel>
                                 </Button>
         
-                                <Button Style="{StaticResource TransparentButton}">
+                                <Button Style="{StaticResource TransparentButton}"
+                                        x:Name="DecryptButton"
+                                        Click="HandleCoding">
                                         <StackPanel>
                                                 <Image 
                                                         Source="/Resources/Icons/Decryption.png"
@@ -147,6 +152,8 @@
                 <Grid Background="#F0F0F0">
                         <TextBox 
                                 x:Name="MainTextArea"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
                                 Margin="2" />
                 </Grid>
         </DockPanel>

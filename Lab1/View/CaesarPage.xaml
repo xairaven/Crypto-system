@@ -9,6 +9,7 @@
     <DockPanel>
         <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key:"/>
         <TextBox DockPanel.Dock="Bottom"
+                 x:Name="KeyBox"
                  MinWidth="230"  
                  Margin="5"
                  PreviewTextInput="NumericOnly"

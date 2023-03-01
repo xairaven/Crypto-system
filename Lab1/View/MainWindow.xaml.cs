@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Lab1.Cryptography;
 using Lab1.Model;
 
 namespace Lab1.View;
@@ -135,5 +136,29 @@ public partial class MainWindow : Window
     private void Exit_OnClick(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void HandleCoding(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        
+        switch ((int) CipherCombo.SelectedItem)
+        {
+            case 0:
+            {
+                if (_pages[(int) CipherCombo.SelectedItem] is not CaesarPage page) return;
+
+                int.TryParse(page.KeyBox.Text, out var key);
+
+                MainTextArea.Text = button.Name.Equals("EncryptButton") ? 
+                    new Caesar().Encrypt(MainTextArea.Text, key) : 
+                    new Caesar().Decrypt(MainTextArea.Text, key);
+                break;
+            }
+            case 1:
+            {
+                break;
+            }
+        }
     }
 }
