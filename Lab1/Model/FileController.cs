@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Windows;
 using Microsoft.Win32;
 
 namespace Lab1.Model;
@@ -27,10 +28,13 @@ public class FileController : IFileController
     {
         if (text.Trim().Equals("")) return;
 
-        var textInFile = File.ReadAllText(fileInfo.FullName);
-        if (!text.Equals(textInFile))
+        if (fileInfo.Extension.Equals(".txt"))
         {
             File.WriteAllText(fileInfo.FullName, text, Encoding.Unicode);
+        }
+        else
+        {
+            HexToFile(fileInfo, text);
         }
     }
 
@@ -46,9 +50,36 @@ public class FileController : IFileController
         {
             throw new FileLoadException("Error occured! Dialog closed.");
         }
-        
-        File.WriteAllText(saveDialog.FileName, text, Encoding.Unicode);
 
-        return new FileInfo(saveDialog.FileName);
+        var fileInfo = new FileInfo(saveDialog.FileName);
+        
+        if (fileInfo.Extension.Equals(".txt"))
+        {
+            File.WriteAllText(fileInfo.FullName, text, Encoding.Unicode);
+        }
+        else
+        {
+           HexToFile(fileInfo, text);
+        }
+        
+        return fileInfo;
+    }
+
+    private void HexToFile(FileInfo fileInfo, string text)
+    {
+        try
+        {
+            var bytes = Convert.FromHexString(text);
+            File.WriteAllBytes(fileInfo.FullName, bytes);
+        }
+        catch (FormatException exception)
+        {
+            MessageBox.Show(
+                messageBoxText: exception.Message,
+                caption: "Denied",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error
+            );   
+        }
     }
 }

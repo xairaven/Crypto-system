@@ -81,7 +81,15 @@ public partial class MainWindow : Window
             return;
         }
 
-        MainTextArea.Text = File.ReadAllText(_fileInfo.FullName);
+        if (_fileInfo.Extension.Equals(".txt"))
+        {
+            MainTextArea.Text = File.ReadAllText(_fileInfo.FullName);
+        }
+        else
+        {
+            var bytes = File.ReadAllBytes(_fileInfo.FullName);
+            MainTextArea.Text = Convert.ToHexString(bytes);
+        }
         
         EnableStatusBar(_fileInfo.FullName);
     }
