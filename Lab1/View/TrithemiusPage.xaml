@@ -5,8 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Lab1.View"
       mc:Ignorable="d"
-      Title="TrithemiusPage" Height="70" Width="280">
-    <Grid>
-        <Label>This is the Trithemius cipher Page!</Label>
+      Title="TrithemiusPage" Height="70" Width="405">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Style="{StaticResource NiceText}">
+            This is the Trithemius cipher Page! <LineBreak />
+            Does not available now.
+        </TextBlock>
     </Grid>
 </Page>
