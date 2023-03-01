@@ -11,7 +11,7 @@ public abstract class SymmetricCipher
         '\a', '\b', '\f', '\n', '\r', '\t', '\v'
     };
 
-    public abstract string Encrypt(string message, int key);
+    public abstract string Encrypt(string message, params object[] keys);
 
-    public abstract string Decrypt(string message, int key);
+    public abstract string Decrypt(string message, params object[] keys);
 }

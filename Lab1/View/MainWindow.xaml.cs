@@ -24,8 +24,8 @@ public partial class MainWindow : Window
         _pages = new List<Page>()
         {
             new CaesarPage(this),
-            new Base64Page(),
-            new TrithemiusPage()
+            new Base64Page(this),
+            new TrithemiusPage(this)
         };
     }
 

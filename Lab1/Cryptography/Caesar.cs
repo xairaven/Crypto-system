@@ -1,16 +1,21 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Lab1.Cryptography;
 
 public class Caesar : SymmetricCipher
 {
-    public override string Encrypt(string message, int key)
+    public override string Encrypt(string message, params object[] keys)
     {
+        var key = Validate(keys);
+        
         return CaesarCipher(message, key);
     }
 
-    public override string Decrypt(string message, int key)
+    public override string Decrypt(string message, params object[] keys)
     {
+        var key = Validate(keys);
+        
         return CaesarCipher(message, -key);
     }
 
@@ -30,5 +35,13 @@ public class Caesar : SymmetricCipher
         }
         
         return sb.ToString();
+    }
+
+    private int Validate(params object[] keys)
+    {
+        if (keys.Length != 1) throw new Exception("Wrong args");
+        if (keys[0] is not int key) throw new Exception("Key must be integer");
+
+        return key;
     }
 }

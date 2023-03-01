@@ -1,11 +1,26 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Lab1.Cryptography;
 
 namespace Lab1.View;
 
 public partial class Base64Page : Page
 {
-    public Base64Page()
+    private readonly TextBox _textBox;
+ 
+    public Base64Page(MainWindow window)
     {
+        _textBox = window.MainTextArea;
         InitializeComponent();
+    }
+    
+    private void EncryptButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _textBox.Text = new Base64().Encrypt(_textBox.Text);
+    }
+
+    private void DecryptButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        _textBox.Text = new Base64().Decrypt(_textBox.Text);
     }
 }

@@ -4,8 +4,11 @@ namespace Lab1.View;
 
 public partial class TrithemiusPage : Page
 {
-    public TrithemiusPage()
+    private readonly TextBox _textBox;
+    
+    public TrithemiusPage(MainWindow window)
     {
+        _textBox = window.MainTextArea;
         InitializeComponent();
     }
 }
