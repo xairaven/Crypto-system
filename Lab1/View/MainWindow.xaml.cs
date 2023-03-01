@@ -23,7 +23,7 @@ public partial class MainWindow : Window
 
         _pages = new List<Page>()
         {
-            new CaesarPage(),
+            new CaesarPage(this),
             new Base64Page(),
             new TrithemiusPage()
         };
@@ -136,34 +136,5 @@ public partial class MainWindow : Window
     private void Exit_OnClick(object sender, RoutedEventArgs e)
     {
         Close();
-    }
-
-    private void HandleCoding(object sender, RoutedEventArgs e)
-    {
-        if (sender is not Button button) return;
-        if (CipherCombo.SelectedItem is not CipherEnum cipher) return;
-        
-        switch (cipher)
-        {
-            case CipherEnum.Caesar:
-            {
-                if (_pages[(int) cipher] is not CaesarPage page) return;
-
-                int.TryParse(page.KeyBox.Text, out var key);
-
-                MainTextArea.Text = button.Name.Equals("EncryptButton") ? 
-                    new Caesar().Encrypt(MainTextArea.Text, key) : 
-                    new Caesar().Decrypt(MainTextArea.Text, key);
-                break;
-            }
-            case CipherEnum.Base64:
-            {
-                break;
-            }
-            case CipherEnum.Trithemius:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
     }
 }

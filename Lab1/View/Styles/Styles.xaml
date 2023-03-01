@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style TargetType="Frame">
+        <Setter Property="NavigationUIVisibility" Value="Hidden" />
+    </Style>
+    
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="White" />
+    </Style>
+                
+    <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+        <StackPanel Margin="-20,0,0,0" Background="#F0F0F0"/>
+    </ItemsPanelTemplate>
+    <Style TargetType="MenuItem">
+        <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+    </Style>
+    
+    <Style x:Key="TransparentButton">
+        <Setter Property="Button.Background" Value="Transparent" />
+        <Setter Property="Button.BorderBrush" Value="Transparent" />
+    </Style>
+    
+    <Style x:Key="InterfaceSeparator">
+        <Setter Property="DockPanel.Dock" Value="Top" /> 
+        <Setter Property="Separator.BorderBrush" Value="DarkGray" />
+        <Setter Property="Separator.BorderThickness" Value="0.5" />
+    </Style>
+    
+    <Style x:Key="VerticalSeparator">
+        <Setter Property="Rectangle.VerticalAlignment" Value="Stretch" />
+        <Setter Property="Rectangle.Width" Value="1" />
+        <Setter Property="Rectangle.Margin" Value="0" />
+        <Setter Property="Rectangle.Stroke" Value="DarkGray" />
+    </Style>
+                
+    <Style x:Key="FileBar">
+        <Setter Property="TextBox.Background" Value="#F0F0F0" />
+        <Setter Property="TextBox.IsReadOnly" Value="True"/> 
+        <Setter Property="TextBox.Margin" Value="5, 0,0,0" />
+        <Setter Property="TextBox.MinWidth" Value="490"/>
+        <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
+        <Setter Property="TextBox.IsEnabled" Value="False" />
+    </Style>
+    
+    <Style x:Key="MainTextArea">
+        <Setter Property="TextBox.TextWrapping" Value="Wrap" />
+        <Setter Property="TextBox.AcceptsReturn" Value="True" />
+        <Setter Property="TextBox.Margin" Value="2" />
+    </Style>
+    
+    <Style x:Key="NiceText">
+        <Setter Property="TextBlock.FontWeight" Value="SemiBold"/>
+        <Setter Property="TextBlock.FontSize" Value="16" />
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        <Setter Property="TextBlock.Margin" Value="5" />
+    </Style>
+</ResourceDictionary>

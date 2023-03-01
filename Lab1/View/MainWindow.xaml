@@ -15,42 +15,6 @@
                         <Setter Property="MinWidth" Value="600"/>
                         <Setter Property="MaxWidth" Value="600"></Setter>
                 </Style>
-                <Style TargetType="Menu">
-                        <Setter Property="Background" Value="White"></Setter>
-                </Style>
-                
-                <Style x:Key="InterfaceSeparator">
-                        <Setter Property="DockPanel.Dock" Value="Top"></Setter>
-                        <Setter Property="Separator.BorderBrush" Value="DarkGray"></Setter>
-                        <Setter Property="Separator.BorderThickness" Value="0.5"></Setter>
-                </Style>
-                
-                <Style x:Key="TransparentButton">
-                        <Setter Property="Button.Background" Value="Transparent" />
-                        <Setter Property="Button.BorderBrush" Value="Transparent" />
-                </Style>
-                
-                <Style x:Key="CryptButtons">
-                        <Setter Property="Button.Background" Value="Transparent" />
-                        <Setter Property="Button.BorderBrush" Value="Black" />
-                        <Setter Property="Border.CornerRadius" Value="7" />
-                </Style>
-                
-                <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
-                        <StackPanel Margin="-20,0,0,0" Background="#F0F0F0"/>
-                </ItemsPanelTemplate>
-                <Style TargetType="MenuItem">
-                        <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
-                </Style>
-                
-                <Style x:Key="FileBar">
-                        <Setter Property="TextBox.Background" Value="#F0F0F0" />
-                        <Setter Property="TextBox.IsReadOnly" Value="True"/> 
-                        <Setter Property="TextBox.Margin" Value="5, 0,0,0" />
-                        <Setter Property="TextBox.MinWidth" Value="490"/>
-                        <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="TextBox.IsEnabled" Value="False" />
-                </Style>
                 
                 <ObjectDataProvider x:Key="CypherList" MethodName="GetValues"
                                     ObjectType="{x:Type system:Enum}">
@@ -74,7 +38,9 @@
                         </MenuItem>
                         <MenuItem Header="About" Click="About_OnClick"/>
                 </Menu>
+                
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
+                
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="25" Margin="5">
                        <StackPanel Orientation="Horizontal">
                                <Button Style="{StaticResource TransparentButton}"
@@ -86,6 +52,7 @@
                                        <Image Source="/Resources/Icons/RedoArrowIcon.png"/>
                                </Button> 
                        </StackPanel>
+                        
                         <TextBox x:Name="StatusBar" Style="{StaticResource FileBar}" />
                         <Border
                                 BorderThickness="1"
@@ -95,17 +62,13 @@
                                 <Image x:Name="StatusBarState" Source="/Resources/Icons/CrossMark.png" />
                         </Border>
                 </StackPanel>
+                
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
                 
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="70">
                         <StackPanel Margin="10,0">
-                                <TextBlock 
-                                        FontWeight="SemiBold"
-                                        FontSize="16"
-                                        TextAlignment="Center"
-                                        Margin="5">
-                                        Ciphers:
-                                </TextBlock>
+                                <TextBlock Style="{StaticResource NiceText}" 
+                                           Text="Ciphers:" />
                                 <ComboBox 
                                         ItemsSource="{Binding Source={StaticResource CypherList}}"
                                         x:Name="CipherCombo"
@@ -115,46 +78,18 @@
                                         SelectionChanged="CipherChanged"
                                         />
                         </StackPanel>
-                        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
-                        <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                <Button Style="{StaticResource TransparentButton}"
-                                        x:Name="EncryptButton"
-                                        Click="HandleCoding">
-                                        <StackPanel>
-                                                <Image 
-                                                        Source="/Resources/Icons/Encryption.png"
-                                                        Width="32"/>
-                
-                                                <Label Content="Encrypt" FontWeight="SemiBold" />
-                                        </StackPanel>
-                                </Button>
-        
-                                <Button Style="{StaticResource TransparentButton}"
-                                        x:Name="DecryptButton"
-                                        Click="HandleCoding">
-                                        <StackPanel>
-                                                <Image 
-                                                        Source="/Resources/Icons/Decryption.png"
-                                                        Width="32"/>
-                
-                                                <Label Content="Decrypt" FontWeight="SemiBold"/>
-                                        </StackPanel>
-                                </Button>
-                        </StackPanel>
-                        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+                        <Rectangle Style="{StaticResource VerticalSeparator}" />
                         <StackPanel>
-                                <Frame x:Name="CipherFrame" 
-                                       NavigationUIVisibility="Hidden"/>
+                                <Frame x:Name="CipherFrame" />
                         </StackPanel>
-                        
                 </StackPanel>
+                
                 <Separator Style="{StaticResource InterfaceSeparator}" />
+                
                 <Grid Background="#F0F0F0">
                         <TextBox 
                                 x:Name="MainTextArea"
-                                TextWrapping="Wrap"
-                                AcceptsReturn="True"
-                                Margin="2" />
+                                Style="{StaticResource MainTextArea}" />
                 </Grid>
         </DockPanel>
 </Window>
