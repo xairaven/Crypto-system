@@ -16,9 +16,9 @@ public class CaesarBruteForce : SymmetricCipher
             .Append(message + "\n\n");
 
         var stopwatch = new Stopwatch();
-        for (int i = -key; i < key; i++)
+        for (int i = key; i >= -key; i--)
         {
-            sb.Append($"Key {i}: \t")
+            sb.Append($"Key {-i}: \t")
                 .Append(CaesarCipher(message, i))
                 .Append('\n');
         }
@@ -26,7 +26,7 @@ public class CaesarBruteForce : SymmetricCipher
         stopwatch.Stop();
         
         MessageBox.Show(
-            messageBoxText: $"BruteForce was done in {stopwatch.Elapsed} ms.",
+            messageBoxText: $"BruteForce was done in {stopwatch.ElapsedMilliseconds} ms.",
             caption: "Elapsed time",
             button: MessageBoxButton.OK,
             icon: MessageBoxImage.Information);
@@ -64,7 +64,7 @@ public class CaesarBruteForce : SymmetricCipher
         if (keys.Length != 1) throw new Exception("Wrong args");
         if (keys[0] is not int key) throw new Exception("Key must be integer");
 
-        if (key < UnicodeCardinal) key = UnicodeCardinal;
+        if (key > UnicodeCardinal) key = UnicodeCardinal;
         
         return key;
     }
