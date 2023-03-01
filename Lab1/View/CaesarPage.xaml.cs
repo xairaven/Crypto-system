@@ -13,9 +13,10 @@ public partial class CaesarPage : Page
     public CaesarPage(MainWindow window)
     {
         _textBox = window.MainTextArea;
+        _textBox.TextChanged += TextBoxOnTextChanged;
         InitializeComponent();
     }
-    
+
     private void NumericOnly(object sender, TextCompositionEventArgs e)
     {
         e.Handled = IsTextNumeric(e.Text);
@@ -60,7 +61,13 @@ public partial class CaesarPage : Page
 
     private void KeyBox_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        EncryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("");
-        DecryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("");
+        EncryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("") && !_textBox.Text.Equals("");
+        DecryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("") && !_textBox.Text.Equals("");
+    }
+    
+    private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        EncryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("") && !_textBox.Text.Equals("");
+        DecryptButton.IsEnabled = !KeyBox.Text.Trim().Equals("") && !_textBox.Text.Equals("");
     }
 }

@@ -13,7 +13,9 @@
             Margin="5, 0">
             
             <Button Style="{StaticResource TransparentButton}"
+                    x:Name="EncryptButton"
                     Margin="0,0,40,0"
+                    IsEnabled="False"
                     Click="EncryptButton_OnClick">
                 <StackPanel>
                     <Image 
@@ -25,6 +27,8 @@
             </Button>
         
             <Button Style="{StaticResource TransparentButton}"
+                    x:Name="DecryptButton"
+                    IsEnabled="False"
                     Margin="40,0,0,0"
                     Click="DecryptButton_OnClick">
                 <StackPanel>

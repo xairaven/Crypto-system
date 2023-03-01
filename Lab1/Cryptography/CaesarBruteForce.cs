@@ -26,7 +26,7 @@ public class CaesarBruteForce : SymmetricCipher
         stopwatch.Stop();
         
         MessageBox.Show(
-            messageBoxText: $"BruteForce was done in {stopwatch.ElapsedMilliseconds} ms.",
+            messageBoxText: $"BruteForce decoding was done in {stopwatch.ElapsedMilliseconds} ms.",
             caption: "Elapsed time",
             button: MessageBoxButton.OK,
             icon: MessageBoxImage.Information);
