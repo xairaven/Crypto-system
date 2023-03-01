@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Text;
 using Microsoft.Win32;
 
 namespace Lab1.Model;
@@ -25,11 +23,6 @@ public class FileController : IFileController
         return new FileInfo(openDialog.FileName);
     }
 
-    public FileInfo Open(FileInfo fileInfo)
-    {
-        throw new NotImplementedException();
-    }
-
     public void Save(FileInfo fileInfo, string text)
     {
         if (text.Trim().Equals("")) return;
@@ -37,7 +30,7 @@ public class FileController : IFileController
         var textInFile = File.ReadAllText(fileInfo.FullName);
         if (!text.Equals(textInFile))
         {
-            File.WriteAllText(fileInfo.FullName, text);
+            File.WriteAllText(fileInfo.FullName, text, Encoding.Unicode);
         }
     }
 
@@ -54,7 +47,7 @@ public class FileController : IFileController
             throw new FileLoadException("Error occured! Dialog closed.");
         }
         
-        File.WriteAllText(saveDialog.FileName, text);
+        File.WriteAllText(saveDialog.FileName, text, Encoding.Unicode);
 
         return new FileInfo(saveDialog.FileName);
     }
