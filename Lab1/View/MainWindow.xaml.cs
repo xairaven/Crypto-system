@@ -141,12 +141,13 @@ public partial class MainWindow : Window
     private void HandleCoding(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button) return;
+        if (CipherCombo.SelectedItem is not CipherEnum cipher) return;
         
-        switch ((int) CipherCombo.SelectedItem)
+        switch (cipher)
         {
-            case 0:
+            case CipherEnum.Caesar:
             {
-                if (_pages[(int) CipherCombo.SelectedItem] is not CaesarPage page) return;
+                if (_pages[(int) cipher] is not CaesarPage page) return;
 
                 int.TryParse(page.KeyBox.Text, out var key);
 
@@ -155,10 +156,14 @@ public partial class MainWindow : Window
                     new Caesar().Decrypt(MainTextArea.Text, key);
                 break;
             }
-            case 1:
+            case CipherEnum.Base64:
             {
                 break;
             }
+            case CipherEnum.Trithemius:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 }
