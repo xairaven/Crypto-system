@@ -8,9 +8,7 @@ public abstract class SymmetricCipher
 
     protected readonly List<char> EscapeSequence = new List<char>()
     {
-        '\n',
-        '\f',
-        '\r',
+        '\a', '\b', '\f', '\n', '\r', '\t', '\v'
     };
 
     public abstract string Encrypt(string message, int key);

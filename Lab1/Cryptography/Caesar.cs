@@ -26,7 +26,7 @@ public class Caesar : SymmetricCipher
                 continue;
             }
 
-            sb.Append((char) ((c + key) % UnicodeCardinal) );
+            sb.Append((char) ((c + key) % UnicodeCardinal));
         }
         
         return sb.ToString();
