@@ -3,6 +3,7 @@
 public enum CipherEnum
 {
     Caesar,
+    CaesarBruteForce,
     Base64,
     Trithemius
 }

@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Lab1.Cryptography;
 using Lab1.Model;
 
 namespace Lab1.View;
@@ -24,6 +23,7 @@ public partial class MainWindow : Window
         _pages = new List<Page>()
         {
             new CaesarPage(this),
+            new CaesarBruteForcePage(this),
             new Base64Page(this),
             new TrithemiusPage(this)
         };
