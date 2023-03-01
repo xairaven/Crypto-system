@@ -24,7 +24,7 @@
             </StackPanel>
             <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
         
-            <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key:"/>
+            <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key range:"/>
         
             <TextBox DockPanel.Dock="Bottom"
                      x:Name="KeyBox"

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text;
-using System.Windows;
 
 namespace Lab1.Cryptography;
 
@@ -14,8 +12,7 @@ public class CaesarBruteForce : SymmetricCipher
         var sb = new StringBuilder();
         sb.Append("Initial message:\n")
             .Append(message + "\n\n");
-
-        var stopwatch = new Stopwatch();
+        
         for (int i = key; i >= -key; i--)
         {
             sb.Append($"Key {-i}: \t")
@@ -23,15 +20,6 @@ public class CaesarBruteForce : SymmetricCipher
                 .Append('\n');
         }
 
-        stopwatch.Stop();
-        
-        MessageBox.Show(
-            messageBoxText: $"BruteForce decoding was done in {stopwatch.ElapsedMilliseconds} ms.",
-            caption: "Elapsed time",
-            button: MessageBoxButton.OK,
-            icon: MessageBoxImage.Information);
-
-        
         return sb.ToString();
     }
     

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,7 +29,7 @@ public partial class CaesarBruteForcePage : Page
         return !MyRegex().IsMatch(str);
     }
 
-    [GeneratedRegex(@"^[0-9\-]+$")]
+    [GeneratedRegex(@"^[0-9]+$")]
     private static partial Regex MyRegex();
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -58,7 +59,18 @@ public partial class CaesarBruteForcePage : Page
     {
         int.TryParse(KeyBox.Text, out var key);
         if (!Validate(key)) return;
+
+        var start = 1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency;
         
         _textBox.Text = new CaesarBruteForce().Decrypt(_textBox.Text, key);
+
+        var time = ((1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency) - start)
+            / 1_000_000m;
+        
+        MessageBox.Show(
+            messageBoxText: $"BruteForce decoding was done in {time} ms.",
+            caption: "Elapsed time",
+            button: MessageBoxButton.OK,
+            icon: MessageBoxImage.Information);
     }
 }
