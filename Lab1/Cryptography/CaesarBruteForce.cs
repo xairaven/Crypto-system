@@ -1,13 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Lab1.Cryptography;
 
 public class CaesarBruteForce : SymmetricCipher
 {
+    private readonly List<string> _bruteForceDictionary;
+    
+    public CaesarBruteForce()
+    {
+        _bruteForceDictionary = new List<string>();
+        const string dictFile = @"../../../Resources/Dictionary/MyDict.txt";
+        
+        var dict = File.ReadAllLines(dictFile);
+        foreach (var word in dict)
+        {
+            _bruteForceDictionary.Add(word);
+        }
+    }
+
     public override string Decrypt(string message, params object[] keys)
     {
         var key = Validate(keys);
+
+        bool done = false;
         
         var sb = new StringBuilder();
         sb.Append("Initial message:\n")
@@ -15,11 +33,20 @@ public class CaesarBruteForce : SymmetricCipher
         
         for (int i = key; i >= -key; i--)
         {
-            sb.Append($"Key {-i}: \t")
-                .Append(CaesarCipher(message, i))
-                .Append('\n');
+            var hackedMessage = CaesarCipher(message, i);
+            foreach (var word in _bruteForceDictionary)
+            {
+                if (!hackedMessage.Contains(word, StringComparison.InvariantCultureIgnoreCase)) continue;
+                
+                sb.Append($"Key {-i}: \t")
+                    .Append(hackedMessage)
+                    .Append('\n');
+
+                done = true;
+            }
         }
 
+        if (!done) sb.Append("No matches found.");
         return sb.ToString();
     }
     

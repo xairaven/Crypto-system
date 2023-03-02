@@ -68,7 +68,7 @@ public partial class CaesarBruteForcePage : Page
             / 1_000_000m;
         
         MessageBox.Show(
-            messageBoxText: $"BruteForce decoding was done in {time} ms.",
+            messageBoxText: $"Bruteforce attack took {time} ms.",
             caption: "Elapsed time",
             button: MessageBoxButton.OK,
             icon: MessageBoxImage.Information);
