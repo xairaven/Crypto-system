@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Cryptosystem.Cryptography;
+using Cryptosystem.Cryptography.Symmetric;
 
-namespace Cryptosystem.View;
+namespace Cryptosystem.View.Symmetric;
 
 public partial class CaesarPage : Page
 {

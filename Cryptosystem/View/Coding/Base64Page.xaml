@@ -1,17 +1,20 @@
-﻿<Page x:Class="Cryptosystem.View.CaesarPage"
+﻿<Page x:Class="Cryptosystem.View.Coding.Base64Page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:Cryptosystem.View"
+      xmlns:local="clr-namespace:Cryptosystem.View.Coding"
       mc:Ignorable="d"
-      Title="CaesarPage" Height="70" Width="405">
-    
+      Title="Base64Page" Height="70" Width="405">
     <DockPanel>
-        <StackPanel Orientation="Horizontal" Margin="5, 0">
+        <StackPanel 
+            HorizontalAlignment="Center"
+            Orientation="Horizontal"
+            Margin="5, 0">
             
             <Button Style="{StaticResource TransparentButton}"
-                    x:Name = "EncryptButton"
+                    x:Name="EncryptButton"
+                    Margin="0,0,40,0"
                     IsEnabled="False"
                     Click="EncryptButton_OnClick">
                 <StackPanel>
@@ -24,8 +27,9 @@
             </Button>
         
             <Button Style="{StaticResource TransparentButton}"
-                    x:Name = "DecryptButton"
+                    x:Name="DecryptButton"
                     IsEnabled="False"
+                    Margin="40,0,0,0"
                     Click="DecryptButton_OnClick">
                 <StackPanel>
                     <Image 
@@ -36,17 +40,5 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        
-        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
-        
-        <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key:"/>
-        
-        <TextBox DockPanel.Dock="Bottom"
-                 x:Name="KeyBox"
-                 MinWidth="230"  
-                 Margin="5"
-                 VerticalContentAlignment="Center"
-                 PreviewTextInput="NumericOnly"
-                 TextChanged="KeyBox_OnTextChanged"/>
     </DockPanel>
 </Page>

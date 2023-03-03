@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Cryptosystem.Cryptography;
+using Cryptosystem.Cryptography.Coding;
 
-namespace Cryptosystem.View;
+namespace Cryptosystem.View.Coding;
 
 public partial class Base64Page : Page
 {

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Cryptosystem.Cryptography.Symmetric;
 
-namespace Cryptosystem.Cryptography;
+namespace Cryptosystem.Cryptography.Bruteforce;
 
 public class CaesarBruteForce : SymmetricCipher
 {
@@ -71,7 +72,7 @@ public class CaesarBruteForce : SymmetricCipher
     
     public override string Encrypt(string message, params object[] keys)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
     
     private int Validate(params object[] keys)

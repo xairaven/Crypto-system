@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Cryptosystem.View;
+namespace Cryptosystem.View.Symmetric;
 
 public partial class TrithemiusPage : Page
 {

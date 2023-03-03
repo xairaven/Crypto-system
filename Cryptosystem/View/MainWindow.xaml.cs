@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Cryptosystem.Model;
+using Cryptosystem.View.Coding;
+using Cryptosystem.View.Symmetric;
 
 namespace Cryptosystem.View;
 
@@ -22,8 +24,8 @@ public partial class MainWindow : Window
 
         _pages = new List<Page>()
         {
-            new CaesarPage(this),
-            new CaesarBruteForcePage(this),
+            new Symmetric.CaesarPage(this),
+            new Bruteforce.CaesarBruteForcePage(this),
             new Base64Page(this),
             new TrithemiusPage(this)
         };

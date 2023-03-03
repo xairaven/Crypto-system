@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Text;
 using System.Windows;
+using Cryptosystem.Cryptography.Symmetric;
 
-namespace Cryptosystem.Cryptography;
+namespace Cryptosystem.Cryptography.Coding;
 
 public class Base64 : SymmetricCipher
 {
     public override string Encrypt(string message, params object[] key)
     {
-        var bytes = System.Text.Encoding.Unicode.GetBytes(message);
+        var bytes = Encoding.Unicode.GetBytes(message);
         return Convert.ToBase64String(bytes);
     }
 
@@ -16,7 +18,7 @@ public class Base64 : SymmetricCipher
         try
         {
             var base64Bytes = Convert.FromBase64String(message);
-            return System.Text.Encoding.Unicode.GetString(base64Bytes);
+            return Encoding.Unicode.GetString(base64Bytes);
         }
         catch (FormatException exception)
         {
