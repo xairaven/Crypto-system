@@ -77,5 +77,9 @@
       <Resource Include="Resources\Icons\OpenTXT.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\Close.png" />
+      <Resource Include="Resources\Icons\Close.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>

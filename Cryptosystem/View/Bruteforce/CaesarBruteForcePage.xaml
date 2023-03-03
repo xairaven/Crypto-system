@@ -27,32 +27,49 @@
             <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
         
             <StackPanel Margin="5, 0">
-                  <Button Style="{StaticResource TransparentButton}"
-                          Click="OpenDict_OnClick"
-                          Width="200"
-                          Height="60"
-                          Margin="0,5,0,0">
-                        <StackPanel>
-                              <Image 
-                                    Source="/Resources/Icons/OpenTXT.png"
-                                    Width="32"/>
+                  <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource TransparentButton}"
+                                Click="OpenDict_OnClick"
+                                Width="110"
+                                Height="60"
+                                Margin="0,5,0,0">
+                              <StackPanel>
+                                    <Image 
+                                          Source="/Resources/Icons/OpenTXT.png"
+                                          Width="32"/>
                 
-                              <Label Content="Open Dictionary" FontWeight="SemiBold"/>
-                        </StackPanel>
-                  </Button>
+                                    <Label Content="Open Dictionary" FontWeight="SemiBold"/>
+                              </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource TransparentButton}"
+                                Click="CloseDict_OnClick"
+                                Width="110"
+                                Height="60"
+                                Margin="0,5,0,0">
+                              <StackPanel>
+                                    <Image 
+                                          Source="/Resources/Icons/Close.png"
+                                          Width="32"/>
+                
+                                    <Label Content="Close Dictionary" FontWeight="SemiBold"/>
+                              </StackPanel>
+                        </Button>
+                  </StackPanel>
+                  
                   
                   <TextBox Style="{StaticResource NiceText}"
                            x:Name="DictPath"
                            IsReadOnly="True"
-                           IsEnabled="False"/>
+                           IsEnabled="False">
+                  </TextBox>
             </StackPanel>
             
             <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                   <Button Style="{StaticResource TransparentButton}"
-                          Width = "75"
-                          Margin="0, 5"
+                          Margin="5, 5"
+                          Height="70"
                           x:Name = "DecryptButton"
                           Click="DecryptButton_OnClick"
                           IsEnabled="False">

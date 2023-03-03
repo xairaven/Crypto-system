@@ -14,7 +14,7 @@ namespace Cryptosystem.View.Bruteforce;
 public partial class CaesarBruteForcePage : Page
 {
     private readonly TextBox _textBox;
-    private FileInfo? _fileInfo;
+    private FileInfo? _dictFileInfo;
 
     public CaesarBruteForcePage(MainWindow window)
     {
@@ -65,9 +65,9 @@ public partial class CaesarBruteForcePage : Page
         int.TryParse(KeyBox.Text, out var key);
         
         if (!Validate(key)) return;
-        if (_fileInfo is null) return;
+        if (_dictFileInfo is null) return;
         
-        var dict = File.ReadAllLines(_fileInfo.FullName).ToList();
+        var dict = File.ReadAllLines(_dictFileInfo.FullName).ToList();
 
         var start = 1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency;
         
@@ -88,14 +88,14 @@ public partial class CaesarBruteForcePage : Page
     {
         try
         {
-            _fileInfo = new FileController().Open();
+            _dictFileInfo = new FileController().Open();
         }
         catch (Exception)
         {
             return;
         }
 
-        if (!_fileInfo.Extension.Equals(".txt"))
+        if (!_dictFileInfo.Extension.Equals(".txt"))
         {
             MessageBox.Show(
                 messageBoxText: "Error! Filetype of dictionary must be txt.",
@@ -105,9 +105,17 @@ public partial class CaesarBruteForcePage : Page
             return;
         }
 
-        DictPath.Text = _fileInfo.Name;
+        DictPath.Text = _dictFileInfo.Name;
 
         DictPath.IsEnabled = true;
+        IsDecryptButtonEnabled();
+    }
+    
+    private void CloseDict_OnClick(object sender, RoutedEventArgs e)
+    {
+        _dictFileInfo = null;
+        DictPath.Text = "";
+        DictPath.IsEnabled = false;
         IsDecryptButtonEnabled();
     }
 
@@ -115,6 +123,6 @@ public partial class CaesarBruteForcePage : Page
     {
         DecryptButton.IsEnabled = !_textBox.Text.Equals("") 
                                   && !KeyBox.Text.Trim().Equals("")
-                                  && _fileInfo is not null;
+                                  && _dictFileInfo is not null;
     }
 }
