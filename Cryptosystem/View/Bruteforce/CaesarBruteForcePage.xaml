@@ -5,33 +5,66 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptosystem.View.Bruteforce"
       mc:Ignorable="d"
-      Title="CaesarBruteForcePage" Height="70" Width="405">
+      Title="CaesarBruteForcePage" Height="100" Width="405">
     
       <DockPanel>
-            <StackPanel Orientation="Horizontal" Margin="5, 0">
-            <Button Style="{StaticResource TransparentButton}"
-                    x:Name = "DecryptButton"
-                    Click="DecryptButton_OnClick"
-                    IsEnabled="False">
-                  <StackPanel>
-                        <Image 
-                              Source="/Resources/Icons/Decryption.png"
-                              Width="32"/>
-                
-                        <Label Content="Decrypt" FontWeight="SemiBold"/>
-                  </StackPanel>
-            </Button>
+            <StackPanel>
+                  <Label HorizontalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Style="{StaticResource NiceText}" 
+                         Height="60"
+                         Content="Key range:"/>
+        
+                  <TextBox
+                           x:Name="KeyBox"
+                           Style="{StaticResource NiceText}"
+                           MaxLength="7"
+                           Margin="5, 0"
+                           PreviewTextInput="NumericOnly"
+                           TextChanged="KeyBox_OnTextChanged"/>
             </StackPanel>
+            
             <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
         
-            <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key range:"/>
-        
-            <TextBox DockPanel.Dock="Bottom"
-                     x:Name="KeyBox"
-                     MinWidth="230"  
-                     Margin="5"
-                     VerticalContentAlignment="Center"
-                     PreviewTextInput="NumericOnly"
-                     TextChanged="KeyBox_OnTextChanged"/>
+            <StackPanel Margin="5, 0">
+                  <Button Style="{StaticResource TransparentButton}"
+                          Click="OpenDict_OnClick"
+                          Width="200"
+                          Height="60"
+                          Margin="0,5,0,0">
+                        <StackPanel>
+                              <Image 
+                                    Source="/Resources/Icons/OpenTXT.png"
+                                    Width="32"/>
+                
+                              <Label Content="Open Dictionary" FontWeight="SemiBold"/>
+                        </StackPanel>
+                  </Button>
+                  
+                  <TextBox Style="{StaticResource NiceText}"
+                           x:Name="DictPath"
+                           IsReadOnly="True"
+                           IsEnabled="False"/>
+            </StackPanel>
+            
+            <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                  <Button Style="{StaticResource TransparentButton}"
+                          Width = "75"
+                          Margin="0, 5"
+                          x:Name = "DecryptButton"
+                          Click="DecryptButton_OnClick"
+                          IsEnabled="False">
+                        <StackPanel>
+                              <Image 
+                                    Source="/Resources/Icons/Decryption.png"
+                                    Width="32"/>
+                
+                              <Label Content="Decrypt" FontWeight="SemiBold"/>
+                        </StackPanel>
+                  </Button>
+            </StackPanel>
+            
       </DockPanel>
 </Page>

@@ -10,16 +10,9 @@ public class CaesarBruteForce : SymmetricCipher
 {
     private readonly List<string> _bruteForceDictionary;
     
-    public CaesarBruteForce()
+    public CaesarBruteForce(List<string> dict)
     {
-        _bruteForceDictionary = new List<string>();
-        const string dictFile = @"../../../Resources/Dictionary/MyDict.txt";
-        
-        var dict = File.ReadAllLines(dictFile);
-        foreach (var word in dict)
-        {
-            _bruteForceDictionary.Add(word);
-        }
+        _bruteForceDictionary = dict;
     }
 
     public override string Decrypt(string message, params object[] keys)
@@ -44,6 +37,7 @@ public class CaesarBruteForce : SymmetricCipher
                     .Append('\n');
 
                 done = true;
+                break;
             }
         }
 

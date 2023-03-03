@@ -65,8 +65,9 @@
                 
                 <Separator Style="{StaticResource InterfaceSeparator}"/>
                 
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="70">
-                        <StackPanel Margin="10,0">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="Auto">
+                        <StackPanel Margin="10,0"
+                                    VerticalAlignment="Center">
                                 <TextBlock Style="{StaticResource NiceText}" 
                                            Text="Ciphers:" />
                                 <ComboBox 
