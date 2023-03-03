@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace Lab1.Model;
+namespace Cryptosystem.Model;
 
 public class FileController : IFileController
 {

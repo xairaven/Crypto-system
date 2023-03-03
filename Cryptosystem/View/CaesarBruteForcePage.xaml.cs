@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Lab1.Cryptography;
+using Cryptosystem.Cryptography;
 
-namespace Lab1.View;
+namespace Cryptosystem.View;
 
 public partial class CaesarBruteForcePage : Page
 {

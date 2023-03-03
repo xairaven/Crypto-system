@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Lab1.View;
+namespace Cryptosystem.View;
 
 public partial class TrithemiusPage : Page
 {

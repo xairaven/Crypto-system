@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lab1.Cryptography;
+namespace Cryptosystem.Cryptography;
 
 public abstract class SymmetricCipher
 {

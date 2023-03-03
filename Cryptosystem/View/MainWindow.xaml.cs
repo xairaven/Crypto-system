@@ -4,9 +4,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Lab1.Model;
+using Cryptosystem.Model;
 
-namespace Lab1.View;
+namespace Cryptosystem.View;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

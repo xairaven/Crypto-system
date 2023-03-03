@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Lab1.Cryptography;
+namespace Cryptosystem.Cryptography;
 
 public class Caesar : SymmetricCipher
 {

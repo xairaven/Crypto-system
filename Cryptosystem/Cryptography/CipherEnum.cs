@@ -1,4 +1,4 @@
-﻿namespace Lab1.Cryptography;
+﻿namespace Cryptosystem.Cryptography;
 
 public enum CipherEnum
 {

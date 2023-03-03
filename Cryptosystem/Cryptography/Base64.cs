@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Lab1.Cryptography;
+namespace Cryptosystem.Cryptography;
 
 public class Base64 : SymmetricCipher
 {

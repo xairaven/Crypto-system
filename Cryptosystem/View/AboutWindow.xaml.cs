@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Lab1.View;
+namespace Cryptosystem.View;
 
 public partial class AboutWindow : Window
 {
