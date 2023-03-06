@@ -8,16 +8,16 @@ public class Trithemius : Caesar
 {
     public override string Encrypt(string message, params object[] keys)
     {
-        Func<int, int> handler = ValidateAndGetHandler(TypeOfCoding.Encrypt, message, keys);
+        Func<int, int> handler = ValidateAndGetHandler(message, keys);
 
         return TrithemiusCipher(message, handler);
     }
 
     public override string Decrypt(string message, params object[] keys)
     {
-        Func<int, int> handler = ValidateAndGetHandler(TypeOfCoding.Decrypt, message, keys);
+        Func<int, int> handler = ValidateAndGetHandler(message, keys);
         
-        return TrithemiusCipher(message, handler);
+        return TrithemiusCipher(message, DecryptionHandler(handler));
     }
     
     private string TrithemiusCipher(string message, Func<int, int> handler)
@@ -40,7 +40,31 @@ public class Trithemius : Caesar
         return sb.ToString();
     }
 
-    private Func<int, int> ValidateAndGetHandler(TypeOfCoding method, string message, params object[] keys)
+    private Func<int, int> LinearHandler(int a, int b)
+    {
+        return (int position) => a * position + b;
+    }
+
+    private Func<int, int> NonLinearHandler(int a, int b, int c)
+    {
+        return (int position) => (a * position * position + b * position + c);
+    }
+
+    private Func<int, int> MottoHandler(string message, string motto)
+    {
+        return (int position) =>
+        {
+            if (message.Length <= motto.Length) return motto[position];
+
+            var factor = (int) Math.Ceiling((decimal) message.Length / motto.Length);
+
+            var localMotto = string.Concat(Enumerable.Repeat(motto, factor));
+
+            return localMotto[position];
+        };
+    }
+    
+    private Func<int, int> ValidateAndGetHandler(string message, params object[] keys)
     {
         switch (keys.Length)
         {
@@ -49,7 +73,7 @@ public class Trithemius : Caesar
                 if (keys[0] is not string motto)
                     throw new ArgumentException("Wrong arguments! Operation ByMotto failed.");
 
-                return ByMotto(method, message, motto);
+                return MottoHandler(message, motto);
             }
             case 2:
             {
@@ -57,7 +81,7 @@ public class Trithemius : Caesar
                     || keys[1] is not int b)
                     throw new ArgumentException("Wrong arguments! Operation LinearEquation failed.");
 
-                return LinearEquation(method, a, b);
+                return LinearHandler(a, b);
             }
             case 3:
             {
@@ -66,46 +90,15 @@ public class Trithemius : Caesar
                     || keys[2] is not int c)
                     throw new ArgumentException("Wrong arguments! Operation NonLinearEquation failed.");
 
-                return NonLinearEquation(method, a, b, c);
+                return NonLinearHandler(a, b, c);
             }
             default:
                 throw new ArgumentException("Wrong arguments! Validation failed!");
         }
     }
 
-    private Func<int, int> LinearEquation(TypeOfCoding method, int a, int b)
+    private Func<int, int> DecryptionHandler(Func<int, int> handler)
     {
-        var factor = method == TypeOfCoding.Encrypt ? 1 : -1;
-
-        return (int position) => factor * (a * position + b);
-    }
-
-    private Func<int, int> NonLinearEquation(TypeOfCoding method, int a, int b, int c)
-    {
-        var factor = method == TypeOfCoding.Encrypt ? 1 : -1;
-        
-        return (int position) => factor * (a * position * position + b * position + c);
-    }
-
-    private Func<int, int> ByMotto(TypeOfCoding method, string message, string motto)
-    {
-        var factor = method == TypeOfCoding.Encrypt ? 1 : -1;
-        
-        return (int position) =>
-        {
-            if (message.Length <= motto.Length) return motto[position];
-
-            var multiplier = (int) Math.Ceiling((decimal) message.Length / motto.Length);
-
-            var localMotto = string.Concat(Enumerable.Repeat(motto, multiplier));
-
-            return factor * localMotto[position];
-        };
-    }
-    
-    private enum TypeOfCoding
-    {
-        Encrypt,
-        Decrypt
+        return (int position) => -1 * handler(position);
     }
 }

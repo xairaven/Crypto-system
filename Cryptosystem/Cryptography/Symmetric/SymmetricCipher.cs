@@ -6,7 +6,7 @@ public abstract class SymmetricCipher
 {
     protected const int UnicodeCardinal = 1114112;
 
-    protected readonly List<char> EscapeSequence = new List<char>()
+    protected readonly List<char> EscapeSequence = new()
     {
         '\a', '\b', '\f', '\n', '\r', '\t', '\v'
     };
