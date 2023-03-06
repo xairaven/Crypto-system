@@ -23,12 +23,13 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        _pages = new List<Page>()
+        _pages = new List<Page>
         {
+            new Base64Page(this),
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
-            new Base64Page(this),
-            new TrithemiusPage(this)
+            new TrithemiusPage(this),
+            new TrithemiusBruteforcePage(this)
         };
     }
 
