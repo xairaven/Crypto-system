@@ -25,12 +25,6 @@ public class Caesar : SymmetricCipher
 
         foreach (var c in message)
         {
-            if (EscapeSequence.Contains(c))
-            {
-                sb.Append(c);
-                continue;
-            }
-
             sb.Append((char) ((c + key) % UnicodeCardinal));
         }
         

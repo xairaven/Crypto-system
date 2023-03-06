@@ -28,13 +28,7 @@ public class Trithemius : Caesar
         {
             char c = message[i];
             
-            if (EscapeSequence.Contains(c))
-            {
-                sb.Append(c);
-                continue;
-            }
-            
-            sb.Append((char) ((c + handler(i)) % UnicodeCardinal));
+            sb.Append((char) ((c + (char) handler(i)) % UnicodeCardinal));
         }
         
         return sb.ToString();
@@ -62,6 +56,11 @@ public class Trithemius : Caesar
 
             return localMotto[position];
         };
+    }
+    
+    private Func<int, int> DecryptionHandler(Func<int, int> handler)
+    {
+        return (int position) => -1 * handler(position);
     }
     
     private Func<int, int> ValidateAndGetHandler(string message, params object[] keys)
@@ -95,10 +94,5 @@ public class Trithemius : Caesar
             default:
                 throw new ArgumentException("Wrong arguments! Validation failed!");
         }
-    }
-
-    private Func<int, int> DecryptionHandler(Func<int, int> handler)
-    {
-        return (int position) => -1 * handler(position);
     }
 }
