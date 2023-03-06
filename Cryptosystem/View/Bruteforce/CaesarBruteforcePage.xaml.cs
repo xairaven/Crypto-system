@@ -11,12 +11,12 @@ using Cryptosystem.Model;
 
 namespace Cryptosystem.View.Bruteforce;
 
-public partial class CaesarBruteForcePage : Page
+public partial class CaesarBruteforcePage : Page
 {
     private readonly TextBox _textBox;
     private FileInfo? _dictFileInfo;
 
-    public CaesarBruteForcePage(MainWindow window)
+    public CaesarBruteforcePage(MainWindow window)
     {
         _textBox = window.MainTextArea;
         _textBox.TextChanged += TextBoxOnTextChanged;
@@ -71,7 +71,7 @@ public partial class CaesarBruteForcePage : Page
 
         var start = 1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency;
         
-        _textBox.Text = new CaesarBruteForce(dict)
+        _textBox.Text = new CaesarBruteforce(dict)
             .Decrypt(_textBox.Text, key);
 
         var time = ((1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency) - start)

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using Cryptosystem.Cryptography.Symmetric;
 
 namespace Cryptosystem.Cryptography.Bruteforce;
 
-public class CaesarBruteForce : SymmetricCipher
+public class CaesarBruteforce : SymmetricCipher
 {
     private readonly List<string> _bruteForceDictionary;
     
-    public CaesarBruteForce(List<string> dict)
+    public CaesarBruteforce(List<string> dict)
     {
         _bruteForceDictionary = dict;
     }
