@@ -4,12 +4,124 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptosystem.View.Symmetric"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      xmlns:trithemiusPages="clr-namespace:Cryptosystem.View.Symmetric"
       mc:Ignorable="d"
-      Title="TrithemiusPage" Height="70" Width="405">
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Style="{StaticResource NiceText}">
-            This is the Trithemius cipher Page! <LineBreak />
-            Does not available now.
-        </TextBlock>
-    </Grid>
+      Title="TrithemiusPage" Height="90" Width="405">
+    <Page.Resources>
+        <ObjectDataProvider x:Key="KeyTypeList" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="trithemiusPages:KeyType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+    
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 0">
+            
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "EncryptButton"
+                    Height="65"
+                    IsEnabled="False"
+                    Click="EncryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Encryption.png"
+                        Width="32"/>
+                
+                    <Label Content="Encrypt" FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+        
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "DecryptButton"
+                    Height="65"
+                    IsEnabled="False"
+                    Click="DecryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Decryption.png"
+                        Width="32"/>
+                
+                    <Label Content="Decrypt" FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <StackPanel Margin="5,0"
+                    VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource NiceText}" 
+                       Text="Key type:" />
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource KeyTypeList}}"
+                x:Name="KeyTypeCombo"
+                Width="85"
+                SelectionChanged="KeyTypeCombo_OnSelectionChanged"
+            />
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Label Content="A:" FontWeight="SemiBold"/>
+                    <TextBox x:Name="ATermBox"
+                             Width="40" 
+                             VerticalContentAlignment="Center" 
+                             IsEnabled="False" 
+                             MaxLength="7"
+                             LostFocus="TermBox_OnLostFocus"
+                             IsEnabledChanged="TermBoxEnabled"
+                             PreviewTextInput="NumericOnly"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Label Content="B:" FontWeight="SemiBold"/>
+                    <TextBox x:Name="BTermBox"
+                             Width="40" 
+                             VerticalContentAlignment="Center" 
+                             IsEnabled="False" 
+                             MaxLength="7"
+                             LostFocus="TermBox_OnLostFocus"
+                             IsEnabledChanged="TermBoxEnabled"
+                             PreviewTextInput="NumericOnly"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Label Content="C:" FontWeight="SemiBold"/>
+                    <TextBox x:Name="CTermBox"
+                             Width="40" 
+                             VerticalContentAlignment="Center" 
+                             IsEnabled="False" 
+                             MaxLength="7"
+                             LostFocus="TermBox_OnLostFocus"
+                             IsEnabledChanged="TermBoxEnabled"
+                             PreviewTextInput="NumericOnly"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Motto:" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="MottoBox"
+                         TextChanged="MottoBox_OnTextChanged"
+                         IsEnabledChanged="ClearIfDisabled"
+                         Margin="5"  IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Page>
