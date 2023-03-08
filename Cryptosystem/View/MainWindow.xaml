@@ -29,7 +29,7 @@
                         <MenuItem Header="File">
                                 <MenuItem Header="New" Click="NewFile_OnClick"/>
                                 <MenuItem Header="Open" Click="OpenFile_OnClick" />
-                                <MenuItem Header="Close" Click="CloseFile_OnClick" />
+                                <MenuItem Header="Close" x:Name="CloseButton" Click="CloseFile_OnClick" />
                                 <Separator />
                                 <MenuItem Header="Save" Click="SaveFile_OnClick" />
                                 <MenuItem Header="Save as..." Click="SaveAsFile_OnClick"/>

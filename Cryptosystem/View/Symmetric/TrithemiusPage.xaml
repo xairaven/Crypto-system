@@ -120,6 +120,7 @@
                 <TextBox x:Name="MottoBox"
                          TextChanged="MottoBox_OnTextChanged"
                          IsEnabledChanged="ClearIfDisabled"
+                         AcceptsReturn="True"
                          Margin="5"  IsEnabled="False"/>
             </StackPanel>
         </Grid>

@@ -6,8 +6,90 @@
       xmlns:local="clr-namespace:Cryptosystem.View.Bruteforce"
       mc:Ignorable="d"
       Title="TrithemiusBruteforcePage" Height="100" Width="405">
-    <Grid>
-        <Label FontWeight="SemiBold" Content="Trithemius Bruteforce Page!" 
-               VerticalAlignment="Center"  HorizontalAlignment="Center"/>
-    </Grid>
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" Width="160" Margin="5">
+                <TextBlock Text="Initial message:" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="InitialTextBox" 
+                         TextChanged="InitialTextBox_OnTextChanged"
+                         Margin="5"
+                         AcceptsReturn="True"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" Width="160" Margin="5">
+                <TextBlock Text="Encrypted message:" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="EncryptedTextBox"
+                         AcceptsReturn="True"
+                         TextChanged="EncryptedTextBox_OnTextChanged"
+                         Margin="5"/>
+            </StackPanel>
+        </Grid>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <StackPanel Margin="5, 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource TransparentButton}"
+                        Click="OpenDict_OnClick"
+                        Width="60"
+                        Height="60"
+                        Margin="0,5,0,0">
+                    <StackPanel>
+                        <Image 
+                            Source="/Resources/Icons/OpenTXT.png"
+                            Width="32"/>
+                
+                        <Label Content="Open" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource TransparentButton}"
+                        Click="CloseDict_OnClick"
+                        Width="60"
+                        Height="60"
+                        Margin="0,5,0,0">
+                    <StackPanel>
+                        <Image 
+                            Source="/Resources/Icons/Close.png"
+                            Width="32"/>
+                
+                        <Label Content="Close" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+                  
+                  
+            <TextBox Style="{StaticResource NiceText}"
+                     x:Name="DictPath"
+                     Width="140"
+                     IsReadOnly="True"
+                     IsEnabled="False">
+            </TextBox>
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <Button Style="{StaticResource TransparentButton}"
+                x:Name = "DecryptButton"
+                Margin="5"
+                Height="70"
+                IsEnabled="False"
+                Click="DecryptButton_OnClick">
+            <StackPanel>
+                <Image 
+                    Source="/Resources/Icons/Decryption.png"
+                    Width="32"/>
+                
+                <Label Content="Decrypt" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Button>
+    </DockPanel>
 </Page>
