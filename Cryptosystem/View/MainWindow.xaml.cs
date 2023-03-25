@@ -29,7 +29,8 @@ public partial class MainWindow : Window
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
             new TrithemiusPage(this),
-            new TrithemiusBruteforcePage(this)
+            new TrithemiusBruteforcePage(this),
+            new XORCipherPage(this)
         };
     }
 

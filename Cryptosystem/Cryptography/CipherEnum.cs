@@ -6,5 +6,6 @@ public enum CipherEnum
     Caesar,
     CaesarBruteForce,
     Trithemius,
-    TrithemiusBruteforce
+    TrithemiusBruteforce,
+    XORCipher
 }
