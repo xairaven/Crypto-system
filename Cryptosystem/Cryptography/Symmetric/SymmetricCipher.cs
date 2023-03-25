@@ -4,7 +4,7 @@ namespace Cryptosystem.Cryptography.Symmetric;
 
 public abstract class SymmetricCipher
 {
-    protected const int UnicodeCardinal = 1114112;
+    protected const int UnicodeCardinal = 65536;
 
     protected readonly List<char> EscapeSequence = new()
     {
