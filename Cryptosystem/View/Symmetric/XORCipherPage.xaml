@@ -6,11 +6,46 @@
       xmlns:local="clr-namespace:Cryptosystem.View.Symmetric"
       mc:Ignorable="d"
       Title="XORCipherPage" Height="70" Width="405">
-    <Grid>
-        <TextBlock 
-            VerticalAlignment="Center" HorizontalAlignment="Center"
-            FontWeight="Bold" FontSize="24">
-            Work in Progress!
-        </TextBlock>
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 0">
+            
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "EncryptButton"
+                    IsEnabled="False"
+                    Click="EncryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Encryption.png"
+                        Width="32"/>
+                
+                    <Label Content="Encrypt" FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+        
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "DecryptButton"
+                    IsEnabled="False"
+                    Click="DecryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Decryption.png"
+                        Width="32"/>
+                
+                    <Label Content="Decrypt" FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" Content="Key:"/>
+        
+        <TextBox DockPanel.Dock="Bottom"
+                 x:Name="KeyBox"
+                 MinWidth="230"  
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 PreviewTextInput="NumericOnly"
+                 TextChanged="KeyBox_OnTextChanged"/>
+    </DockPanel>
 </Page>
