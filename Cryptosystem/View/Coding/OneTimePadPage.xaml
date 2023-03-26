@@ -6,11 +6,35 @@
       xmlns:local="clr-namespace:Cryptosystem.View.Coding"
       mc:Ignorable="d"
       Title="OneTimePadPage" Height="70" Width="405">
-    <Grid>
-        <TextBlock
-            VerticalAlignment="Center" HorizontalAlignment="Center"
-            FontWeight="Bold" FontSize="24">
-            Work in Progress!
-        </TextBlock>
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 0">
+            
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "GenerateButton"
+                    IsEnabled="False"
+                    Width="80"
+                    Click="GenerateButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/CreateDocument.png"
+                        Width="32"/>
+                
+                    <Label Content="Generate" FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <Label HorizontalAlignment="Center" FontWeight="SemiBold" DockPanel.Dock="Top" 
+               Content="Length:"/>
+        
+        <TextBox DockPanel.Dock="Bottom"
+                 x:Name="LengthBox"
+                 MinWidth="230"  
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 PreviewTextInput="NumericOnly"
+                 TextChanged="LengthBox_OnTextChanged"/>
+    </DockPanel>
 </Page>

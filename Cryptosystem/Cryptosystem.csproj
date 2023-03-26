@@ -81,5 +81,10 @@
       <Resource Include="Resources\Icons\Close.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\CreateDocument.png" />
+      <Resource Include="Resources\Icons\CreateDocument.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Icons\Creeper.png" />
     </ItemGroup>
 </Project>
