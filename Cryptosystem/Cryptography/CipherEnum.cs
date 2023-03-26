@@ -8,5 +8,6 @@ public enum CipherEnum
     OneTimePad,
     Trithemius,
     TrithemiusBruteforce,
+    Vernam,
     XORCipher
 }

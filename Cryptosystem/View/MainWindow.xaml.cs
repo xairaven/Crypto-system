@@ -31,6 +31,7 @@ public partial class MainWindow : Window
             new OneTimePadPage(this),
             new TrithemiusPage(this),
             new TrithemiusBruteforcePage(this),
+            new VernamPage(this),
             new XORCipherPage(this),
         };
     }
