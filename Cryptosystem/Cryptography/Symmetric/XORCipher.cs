@@ -7,19 +7,15 @@ public class XORCipher : SymmetricCipher
 {
     public override string Encrypt(string message, params object[] keys)
     {
-        var seed = Validate(keys);
-
-        return Cipher(message, seed);
+        return ValidateAndReturn(message, keys);
     }
 
     public override string Decrypt(string message, params object[] keys)
     {
-        var seed = Validate(keys);
-
-        return Cipher(message, seed);
+        return ValidateAndReturn(message, keys);
     }
 
-    private string Cipher(string message, int seed)
+    private string CipherSeed(string message, int seed)
     {
         var random = new Random(seed);
 
@@ -32,12 +28,31 @@ public class XORCipher : SymmetricCipher
 
         return sb.ToString();
     }
+    
+    private string CipherGamma(string message, string gamma)
+    {
+        if (gamma.Length != message.Length)
+            throw new Exception("Message and pad lengths must be equal");
+        
+        var sb = new StringBuilder();
 
-    private int Validate(params object[] keys)
+        for (var i = 0; i < message.Length; i++)
+        {
+            sb.Append((char) ((message[i] ^ gamma[i]) % UnicodeCardinal));
+        }
+
+        return sb.ToString();
+    }
+
+    private string ValidateAndReturn(string message, params object[] keys)
     {
         if (keys.Length != 1) throw new Exception("Wrong args");
-        if (keys[0] is not int key) throw new Exception("Key must be integer");
-
-        return key;
+        
+        return keys[0] switch
+        {
+            int seed => CipherSeed(message, seed),
+            string gamma => CipherGamma(message, gamma),
+            _ => throw new Exception("Wrong key type")
+        };
     }
 }

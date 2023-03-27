@@ -23,6 +23,7 @@ public partial class VernamPage : Page
 
     private void EncryptButton_OnClick(object sender, RoutedEventArgs e)
     {
+        if (_fileInfo is null) return;
         var gamma = File.ReadAllLines(_fileInfo.FullName, Encoding.Unicode);
 
         try
@@ -42,6 +43,7 @@ public partial class VernamPage : Page
 
     private void DecryptButton_OnClick(object sender, RoutedEventArgs e)
     {
+        if (_fileInfo is null) return;
         var gamma = File.ReadAllLines(_fileInfo.FullName, Encoding.Unicode);
 
         try
