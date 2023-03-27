@@ -6,11 +6,76 @@
       xmlns:local="clr-namespace:Cryptosystem.View.Symmetric"
       mc:Ignorable="d"
       Title="VernamPage" Height="100" Width="405">
-    <Grid>
-        <TextBlock
-            VerticalAlignment="Center" HorizontalAlignment="Center"
-            FontWeight="Bold" FontSize="24">
-            Work in Progress!
-        </TextBlock>
-    </Grid>
+    <DockPanel>
+            <StackPanel Orientation="Horizontal" Margin="5, 0">
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name = "EncryptButton"
+                        Height="65"
+                        IsEnabled="False"
+                        Click="EncryptButton_OnClick">
+                            <StackPanel>
+                                <Image 
+                                    Source="/Resources/Icons/Encryption.png"
+                                    Width="32"/>
+                            
+                                <Label Content="Encrypt" FontWeight="SemiBold" />
+                            </StackPanel>
+                </Button>
+                    
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name = "DecryptButton"
+                        Height="65"
+                        IsEnabled="False"
+                        Click="DecryptButton_OnClick">
+                            <StackPanel>
+                                <Image 
+                                    Source="/Resources/Icons/Decryption.png"
+                                    Width="32"/>
+                            
+                                <Label Content="Decrypt" FontWeight="SemiBold"/>
+                            </StackPanel>
+                </Button>
+            </StackPanel>
+            
+            <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+            <StackPanel Margin="5, 0">
+                  <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource TransparentButton}"
+                                Click="OpenPad_OnClick"
+                                Width="110"
+                                Height="60"
+                                Margin="0,5,0,0">
+                              <StackPanel>
+                                    <Image 
+                                          Source="/Resources/Icons/OpenTXT.png"
+                                          Width="32"/>
+                
+                                    <Label Content="Open Pad" FontWeight="SemiBold"/>
+                              </StackPanel>
+                        </Button>
+                      
+                        <Button Style="{StaticResource TransparentButton}"
+                                Click="ClosePad_OnClick"
+                                Width="110"
+                                Height="60"
+                                Margin="0,5,0,0">
+                              <StackPanel>
+                                    <Image 
+                                          Source="/Resources/Icons/Close.png"
+                                          Width="32"/>
+                
+                                    <Label Content="Close Pad" FontWeight="SemiBold"/>
+                              </StackPanel>
+                        </Button>
+                  </StackPanel>
+                  
+                  
+                  <TextBox Style="{StaticResource NiceText}"
+                           x:Name="FilePath"
+                           IsReadOnly="True"
+                           IsEnabled="False">
+                  </TextBox>
+            </StackPanel>
+    </DockPanel>
 </Page>
