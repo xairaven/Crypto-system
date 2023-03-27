@@ -88,9 +88,21 @@
                 <Separator Style="{StaticResource InterfaceSeparator}" />
                 
                 <Grid Background="#F0F0F0">
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="15"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <TextBox 
                                 x:Name="MainTextArea"
+                                TextChanged="MainTextArea_OnTextChanged"
                                 Style="{StaticResource MainTextArea}" />
+                        
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                <Label Content="Symbols: 0"
+                                       FontSize="10"
+                                       x:Name="DetailsBar" 
+                                       VerticalContentAlignment="Center"/>
+                        </StackPanel>
                 </Grid>
         </DockPanel>
 </Window>

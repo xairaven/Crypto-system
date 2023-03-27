@@ -116,6 +116,11 @@ public partial class MainWindow : Window
         StatusBarState.Source = new BitmapImage(
             new Uri("pack://application:,,,/Resources/Icons/CrossMark.png"));
     }
+    
+    private void MainTextArea_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        DetailsBar.Content = $"Symbols: {MainTextArea.Text.Length}";
+    }
 
     private void SaveFile_OnClick(object sender, RoutedEventArgs e)
     {
@@ -147,7 +152,7 @@ public partial class MainWindow : Window
             return;
         }
     }
-    
+
     private void Exit_OnClick(object sender, RoutedEventArgs e)
     {
         Close();
