@@ -28,6 +28,7 @@ public partial class MainWindow : Window
             new Base64Page(this),
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
+            new LitFragPage(this),
             new OneTimePadPage(this),
             new TrithemiusPage(this),
             new TrithemiusBruteforcePage(this),

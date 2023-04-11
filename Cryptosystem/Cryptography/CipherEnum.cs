@@ -5,6 +5,7 @@ public enum CipherEnum
     Base64,
     Caesar,
     CaesarBruteForce,
+    LitFrag,
     OneTimePad,
     Trithemius,
     TrithemiusBruteforce,
