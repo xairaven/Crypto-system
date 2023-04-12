@@ -12,13 +12,10 @@ public class LitFrag : SymmetricCipher
     private readonly List<char[]> _matrix;
     private readonly Dictionary<char, HashSet<string>> _dict;
     
-    public LitFrag(string text)
+    public LitFrag(string poem)
     {
-        _matrix = new List<char[]>();
-        _dict = new Dictionary<char, HashSet<string>>();
-        
-        InitializeMatrix(text, _matrix);
-        InitializeDictSet(_matrix, _dict);
+        InitializeMatrix(poem, out _matrix);
+        InitializeDictSet(_matrix, out _dict);
     }
 
     public override string Encrypt(string message, params object[] keys)
@@ -44,9 +41,11 @@ public class LitFrag : SymmetricCipher
 
         foreach (var str in list)
         {
-            var position = str.Split("/");
-            var l = int.Parse(position[0]);
-            var p = int.Parse(position[1]);
+            var coords = str.Split("/");
+            
+            // symbol position, format: line/position
+            var l = int.Parse(coords[0]);
+            var p = int.Parse(coords[1]);
 
             sb.Append(_matrix[l - 1][p - 1]);
         }
@@ -54,8 +53,10 @@ public class LitFrag : SymmetricCipher
         return sb.ToString();
     }
     
-    private void InitializeDictSet(List<char[]> matrix, Dictionary<char, HashSet<string>> dict)
+    private void InitializeDictSet(List<char[]> matrix, out Dictionary<char, HashSet<string>> dict)
     {
+        dict = new Dictionary<char, HashSet<string>>();
+        
         for (var l = 0; l < matrix.Count; l++)
         {
             for (var p = 0; p < matrix[l].Length; p++)
@@ -73,8 +74,10 @@ public class LitFrag : SymmetricCipher
         }
     }
 
-    private void InitializeMatrix(string text, List<char[]> matrix)
+    private void InitializeMatrix(string text, out List<char[]> matrix)
     { 
+        matrix = new List<char[]>();
+        
         var reader = new StringReader(text);
 
         while (reader.Peek() > -1)
@@ -86,12 +89,15 @@ public class LitFrag : SymmetricCipher
 
     private void ValidateMessage(string message)
     {
+        // are there letters that are in the message but not in the key
         var missingLetters = message.Where(symbol => !_dict.ContainsKey(symbol)).ToList();
         if (missingLetters.Count == 0) return;
 
+        // is it ok that some letters will be random?
         var isMissingOk = MessageBoxHandling(missingLetters);
         if (!isMissingOk) throw new Exception("Complete the key with the missing letters.");
         
+        // add random positions for this letters
         foreach (var c in missingLetters)
         {
             if (!_dict.ContainsKey(c))
@@ -99,21 +105,20 @@ public class LitFrag : SymmetricCipher
                 _dict.Add(c, new HashSet<string>());
             }
 
+            // symbol position, format: line/position
             var l = new Random().Next(0, _matrix.Count);
             var p = new Random().Next(0, _matrix[l].Length);
             
-            // symbol position, format: line/position
             _dict[c].Add($"{l + 1}/{p + 1}");
         }
     }
 
-    private bool MessageBoxHandling(List<char> missingLettersList)
+    private bool MessageBoxHandling(List<char> missingLetters)
     {
-        var set = missingLettersList.ToHashSet();
-        var missingLetters = string.Join(", ", set);
+        var letters = string.Join(", ", missingLetters.ToHashSet());
 
         var message = $"The key is missing the following letters:\n" +
-                      $"{missingLetters}.\n" +
+                      $"{letters}.\n" +
                       $"Do you want to replace it by random symbols?"; 
         
         var result = MessageBox.Show(
