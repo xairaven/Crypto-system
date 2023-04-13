@@ -25,11 +25,14 @@ public partial class MainWindow : Window
 
         _pages = new List<Page>
         {
+            new AESPage(this),
             new Base64Page(this),
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
+            new DESPage(this),
             new LitFragPage(this),
             new OneTimePadPage(this),
+            new TripleDESPage(this),
             new TrithemiusPage(this),
             new TrithemiusBruteforcePage(this),
             new VernamPage(this),
