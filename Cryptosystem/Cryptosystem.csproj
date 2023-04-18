@@ -13,7 +13,6 @@
     </PropertyGroup>
     
     <ItemGroup>
-      <Folder Include="Cryptography\Misc\" />
       <Folder Include="Resources/Icons" />
     </ItemGroup>
     
