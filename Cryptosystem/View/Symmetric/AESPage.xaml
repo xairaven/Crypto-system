@@ -4,11 +4,118 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptosystem.View.Symmetric"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      xmlns:enum="clr-namespace:Cryptosystem.Enum"
+      xmlns:syscrypto="clr-namespace:System.Security.Cryptography;assembly=System.Security.Cryptography"
       mc:Ignorable="d"
-      Title="AESPage" Height="100" Width="405">
-    <Grid>
-        <TextBlock Text="AES: Work in Progress"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                   FontWeight="Bold" FontSize="24"/>
-    </Grid>
+      Title="AESPage" Height="135" Width="405">
+    <Page.Resources>
+        <ObjectDataProvider x:Key="DataModeList" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum:DataMode"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="CipherModeList" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="syscrypto:CipherMode"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+    
+    
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="5, 0">
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "EncryptButton"
+                    Height="65"
+                    IsEnabled="False"
+                    Click="EncryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Encryption.png"
+                        Width="32"/>
+                            
+                    <Label Content="Encrypt" FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+                    
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name = "DecryptButton"
+                    Height="65"
+                    IsEnabled="False"
+                    Click="DecryptButton_OnClick">
+                <StackPanel>
+                    <Image 
+                        Source="/Resources/Icons/Decryption.png"
+                        Width="32"/>
+                            
+                    <Label Content="Decrypt" FontWeight="SemiBold"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+            
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <StackPanel Margin="10, 0" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Cipher mode:" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <ComboBox 
+                    ItemsSource="{Binding Source={StaticResource CipherModeList}}"
+                    x:Name="CipherModeCombo"
+                    Margin="5"
+                    Width="70"
+                                
+                    SelectionChanged="CipherModeChanged"
+                />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Data mode:" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <ComboBox 
+                    ItemsSource="{Binding Source={StaticResource DataModeList}}"
+                    x:Name="DataModeCombo"
+                    Margin="5"
+                    Width="70"
+                                
+                    SelectionChanged="DataModeChanged"
+                />
+            </StackPanel>
+        </StackPanel>
+        
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Key:" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="KeyBox"
+                         MaxHeight="18"
+                         TextChanged="KeyBox_OnTextChanged"
+                         AcceptsReturn="True"
+                         Width="170"
+                         Margin="5"  />
+                <Button
+                    x:Name="GenerateKeyButton"
+                    Width="170"
+                    Click="GenerateKeyButton_OnClick" Content="Generate key" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="IV:" 
+                           HorizontalAlignment="Center"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="IVBox"
+                         MaxHeight="18"
+                         AcceptsReturn="True"
+                         Width="170"
+                         Margin="5"  />
+                <Button
+                    x:Name="GenerateIVButton"
+                    Width="170"
+                    Click="GenerateIVButton_OnClick" Content="Generate IV" />
+            </StackPanel>
+        </StackPanel>
+        
+    </DockPanel>
 </Page>
