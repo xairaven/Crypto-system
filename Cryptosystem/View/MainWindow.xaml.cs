@@ -30,6 +30,7 @@ public partial class MainWindow : Window
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
             new DESPage(this),
+            new HexPage(this),
             new LitFragPage(this),
             new OneTimePadPage(this),
             new TripleDESPage(this),
