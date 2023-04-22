@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Cryptosystem.Cryptography.Symmetric;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Bruteforce;
 
-public class CaesarBruteforce
+public class CaesarBruteforce : IBruteforce
 {
     private readonly List<string> _bruteForceDictionary;
     
@@ -14,7 +14,7 @@ public class CaesarBruteforce
         _bruteForceDictionary = dict;
     }
 
-    public string Decrypt(string message, params object[] keys)
+    public string Hack(string message, params object[] keys)
     {
         var key = Validate(keys);
 

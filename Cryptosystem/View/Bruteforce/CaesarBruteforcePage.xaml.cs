@@ -72,7 +72,7 @@ public partial class CaesarBruteforcePage : Page
         var start = 1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency;
         
         _textBox.Text = new CaesarBruteforce(dict)
-            .Decrypt(_textBox.Text, key);
+            .Hack(_textBox.Text, key);
 
         var time = ((1_000_000_000.0m * Stopwatch.GetTimestamp() / Stopwatch.Frequency) - start)
             / 1_000_000m;

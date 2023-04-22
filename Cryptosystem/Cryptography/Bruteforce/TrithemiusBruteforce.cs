@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Bruteforce;
 
-public class TrithemiusBruteforce
+public class TrithemiusBruteforce : IBruteforce
 {
     private readonly List<string> _dict;
 
@@ -13,9 +14,9 @@ public class TrithemiusBruteforce
         _dict = dict;
     }
     
-    public string Decrypt(string initialMessage, string encryptedMessage)
+    public string Hack(string initialMessage, params object[] keys)
     {
-        Validate(initialMessage, encryptedMessage);
+        var encryptedMessage = ValidateGetEncrypted(initialMessage, keys);
         
         var diff = FindDiff(initialMessage, encryptedMessage);
 
@@ -59,9 +60,17 @@ public class TrithemiusBruteforce
         return diff.ToString();
     }
 
-    private void Validate(string initialMessage, string encryptedMessage)
+    private string ValidateGetEncrypted(string initialMessage, object[] keys)
     {
+        if (keys.Length != 1)
+            throw new ArgumentException("Wrong amount of args");
+
+        if (keys[0] is not string encryptedMessage)
+            throw new ArgumentException("Wrong argument");
+
         if (initialMessage.Length != encryptedMessage.Length)
             throw new ArgumentException("Initial and Encrypted messages are not in pair.");
+
+        return encryptedMessage;
     }
 }

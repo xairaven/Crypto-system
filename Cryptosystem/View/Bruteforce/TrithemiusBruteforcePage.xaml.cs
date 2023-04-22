@@ -44,7 +44,7 @@ public partial class TrithemiusBruteforcePage : Page
         try
         {
             _textBox.Text = new TrithemiusBruteforce(dict).
-                Decrypt(InitialTextBox.Text, EncryptedTextBox.Text);
+                Hack(InitialTextBox.Text, EncryptedTextBox.Text);
         }
         catch (Exception exception)
         {
