@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Text;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Symmetric;
 
-public class XORCipher : SymmetricCipher
+public class XORCipher : ISymmetric
 {
-    public override string Encrypt(string message, params object[] keys)
+    public string Encrypt(string message, params object[] keys)
     {
         return ValidateAndReturn(message, keys);
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public string Decrypt(string message, params object[] keys)
     {
         return ValidateAndReturn(message, keys);
     }
@@ -22,7 +23,7 @@ public class XORCipher : SymmetricCipher
         var sb = new StringBuilder();
         foreach (var с in message)
         {
-            var gamma = (char) random.Next(1, UnicodeCardinal + 1);
+            var gamma = (char) random.Next(1, Constants.UnicodeCardinal + 1);
             sb.Append((char) (с ^ gamma));
         }
 
@@ -38,7 +39,7 @@ public class XORCipher : SymmetricCipher
 
         for (var i = 0; i < message.Length; i++)
         {
-            sb.Append((char) ((message[i] ^ gamma[i]) % UnicodeCardinal));
+            sb.Append((char) ((message[i] ^ gamma[i]) % Constants.UnicodeCardinal));
         }
 
         return sb.ToString();

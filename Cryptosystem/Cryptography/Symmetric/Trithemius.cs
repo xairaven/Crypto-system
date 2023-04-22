@@ -6,16 +6,16 @@ namespace Cryptosystem.Cryptography.Symmetric;
 
 public class Trithemius : Caesar
 {
-    public override string Encrypt(string message, params object[] keys)
+    public new string Encrypt(string message, params object[] keys)
     {
-        Func<int, int> handler = ValidateAndGetHandler(message, keys);
+        var handler = ValidateAndGetHandler(message, keys);
 
         return TrithemiusCipher(message, handler);
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public new string Decrypt(string message, params object[] keys)
     {
-        Func<int, int> handler = ValidateAndGetHandler(message, keys);
+        var handler = ValidateAndGetHandler(message, keys);
         
         return TrithemiusCipher(message, DecryptionHandler(handler));
     }
@@ -28,7 +28,7 @@ public class Trithemius : Caesar
         {
             char c = message[i];
             
-            sb.Append((char) ((c + (char) handler(i)) % UnicodeCardinal));
+            sb.Append((char) ((c + (char) handler(i)) % Constants.UnicodeCardinal));
         }
         
         return sb.ToString();

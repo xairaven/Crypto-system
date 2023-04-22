@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Text;
 using System.Windows;
-using Cryptosystem.Cryptography.Symmetric;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Coding;
 
-public class Hexadecimal : SymmetricCipher
+public class Hexadecimal : ISymmetric
 {
-    public override string Encrypt(string message, params object[] key)
+    public string Encrypt(string message, params object[] key)
     {
         var bytes = Encoding.Unicode.GetBytes(message);
         return Convert.ToHexString(bytes);
     }
 
-    public override string Decrypt(string message, params object[] key)
+    public string Decrypt(string message, params object[] key)
     {
         try
         {

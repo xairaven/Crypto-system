@@ -5,7 +5,7 @@ using Cryptosystem.Cryptography.Symmetric;
 
 namespace Cryptosystem.Cryptography.Bruteforce;
 
-public class CaesarBruteforce : SymmetricCipher
+public class CaesarBruteforce
 {
     private readonly List<string> _bruteForceDictionary;
     
@@ -14,7 +14,7 @@ public class CaesarBruteforce : SymmetricCipher
         _bruteForceDictionary = dict;
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public string Decrypt(string message, params object[] keys)
     {
         var key = Validate(keys);
 
@@ -50,24 +50,18 @@ public class CaesarBruteforce : SymmetricCipher
 
         foreach (var c in message)
         {
-            sb.Append((char) ((c + key) % UnicodeCardinal));
+            sb.Append((char) ((c + key) % Constants.UnicodeCardinal));
         }
         
         return sb.ToString();
     }
-    
-    
-    public override string Encrypt(string message, params object[] keys)
-    {
-        throw new NotImplementedException();
-    }
-    
+
     private int Validate(params object[] keys)
     {
         if (keys.Length != 1) throw new Exception("Wrong args");
         if (keys[0] is not int key) throw new Exception("Key must be integer");
 
-        if (key > UnicodeCardinal) key = UnicodeCardinal;
+        if (key > Constants.UnicodeCardinal) key = Constants.UnicodeCardinal;
         
         return key;
     }

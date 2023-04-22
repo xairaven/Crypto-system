@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Text;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Symmetric;
 
-public class Vernam : SymmetricCipher
+public class Vernam : ISymmetric
 {
-    public override string Encrypt(string message, params object[] keys)
+    public string Encrypt(string message, params object[] keys)
     {
         var gamma = Validate(message.Length, keys);
         
         return VernamCipher(Mode.Encrypt, message, gamma);
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public string Decrypt(string message, params object[] keys)
     {
         var gamma = Validate(message.Length, keys);
         
@@ -29,7 +30,7 @@ public class Vernam : SymmetricCipher
                 message[i] + gamma[i] : 
                 message[i] - gamma[i];
 
-            sb.Append((char) (symbol % UnicodeCardinal));
+            sb.Append((char) (symbol % Constants.UnicodeCardinal));
         }
 
         return sb.ToString();

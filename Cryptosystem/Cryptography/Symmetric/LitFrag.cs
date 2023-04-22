@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Symmetric;
 
-public class LitFrag : SymmetricCipher
+public class LitFrag : ISymmetric
 {
     private readonly List<char[]> _matrix;
     private readonly Dictionary<char, HashSet<string>> _dict;
@@ -18,7 +19,7 @@ public class LitFrag : SymmetricCipher
         InitializeDictSet(_matrix, out _dict);
     }
 
-    public override string Encrypt(string message, params object[] keys)
+    public string Encrypt(string message, params object[] keys)
     {
         ValidateMessage(message.ToLower());
 
@@ -32,7 +33,7 @@ public class LitFrag : SymmetricCipher
         return string.Join(", ", list);
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public string Decrypt(string message, params object[] keys)
     {
         ValidateEncryptedMessage(message);
 

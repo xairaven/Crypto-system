@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Text;
+using Cryptosystem.Cryptography.Base;
 
 namespace Cryptosystem.Cryptography.Symmetric;
 
-public class Caesar : SymmetricCipher
+public class Caesar : ISymmetric
 {
-    public override string Encrypt(string message, params object[] keys)
+    public string Encrypt(string message, params object[] keys)
     {
         var key = Validate(keys);
         
         return CaesarCipher(message, key);
     }
 
-    public override string Decrypt(string message, params object[] keys)
+    public string Decrypt(string message, params object[] keys)
     {
         var key = Validate(keys);
         
@@ -25,7 +26,7 @@ public class Caesar : SymmetricCipher
 
         foreach (var c in message)
         {
-            sb.Append((char) ((c + key) % UnicodeCardinal));
+            sb.Append((char) ((c + key) % Constants.UnicodeCardinal));
         }
         
         return sb.ToString();
