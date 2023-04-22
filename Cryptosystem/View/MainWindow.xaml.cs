@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Cryptosystem.Model;
+using Cryptosystem.View.Asymmetric;
 using Cryptosystem.View.Bruteforce;
 using Cryptosystem.View.Coding;
 using Cryptosystem.View.Symmetric;
@@ -31,6 +32,7 @@ public partial class MainWindow : Window
             new CaesarBruteforcePage(this),
             new DESPage(this),
             new HexPage(this),
+            new KnapsackPage(this),
             new LitFragPage(this),
             new OneTimePadPage(this),
             new TripleDESPage(this),

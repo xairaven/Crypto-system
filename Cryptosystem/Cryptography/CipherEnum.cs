@@ -8,6 +8,7 @@ public enum CipherEnum
     CaesarBruteForce,
     DES,
     Hexadecimal,
+    Knapsack,
     LitFrag,
     OneTimePad,
     TripleDES,
