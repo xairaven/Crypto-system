@@ -5,11 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Cryptosystem.Enum;
 
-using SysAES = System.Security.Cryptography.Aes;
-using SysDES = System.Security.Cryptography.DES;
-using SysTripleDES = System.Security.Cryptography.TripleDES;
-
-namespace Cryptosystem.Cryptography.Symmetric;
+namespace Cryptosystem.Cryptography.Base;
 
 /// <summary>
 /// keys[0] - Hex string or Base64
@@ -17,9 +13,9 @@ namespace Cryptosystem.Cryptography.Symmetric;
 /// keys[2] - Key
 /// keys[3] - IV
 /// </summary>
-public interface IStandardCipher
+public abstract class BlockCipher
 {
-    public string Encrypt(CipherEnum type, string message, params object[] keys)
+    protected string Encrypt(CipherEnum type, string message, params object[] keys)
     {
         var provider = CryptoProvider(type, keys);
 
@@ -45,7 +41,7 @@ public interface IStandardCipher
             : Convert.ToHexString(encrypted);
     }
 
-    public string Decrypt(CipherEnum type, string message, params object[] keys)
+    protected string Decrypt(CipherEnum type, string message, params object[] keys)
     {
         var provider = CryptoProvider(type, keys);
 
@@ -78,9 +74,9 @@ public interface IStandardCipher
         
         SymmetricAlgorithm cipher = type switch
         {
-            CipherEnum.AES => SysAES.Create(),
-            CipherEnum.DES => SysDES.Create(),
-            CipherEnum.TripleDES => SysTripleDES.Create(),
+            CipherEnum.AES => Aes.Create(),
+            CipherEnum.DES => DES.Create(),
+            CipherEnum.TripleDES => TripleDES.Create(),
             
             _ => throw new ArgumentException("Wrong cipher type")
         };
@@ -127,8 +123,8 @@ public interface IStandardCipher
 
         switch (cipher)
         {
-            case CipherEnum.DES when SysDES.IsWeakKey(Encoding.UTF8.GetBytes(key)):
-            case CipherEnum.TripleDES when SysTripleDES.IsWeakKey(Encoding.UTF8.GetBytes(key)):
+            case CipherEnum.DES when DES.IsWeakKey(Encoding.UTF8.GetBytes(key)):
+            case CipherEnum.TripleDES when TripleDES.IsWeakKey(Encoding.UTF8.GetBytes(key)):
                 throw new ArgumentException("Weak key.");
         }
 

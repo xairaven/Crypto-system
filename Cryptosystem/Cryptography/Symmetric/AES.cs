@@ -8,19 +8,17 @@ namespace Cryptosystem.Cryptography.Symmetric;
 /// keys[2] - Key
 /// keys[3] - IV
 /// </summary>
-public class AES : ISymmetric, IStandardCipher
+public class AES : BlockCipher, ISymmetric 
 {
     private const CipherEnum CipherType = CipherEnum.AES;
 
     public string Encrypt(string message, params object[] keys)
     {
-        IStandardCipher cipher = this;
-        return cipher.Encrypt(CipherType, message, keys);
+        return base.Encrypt(CipherType, message, keys);
     }
 
     public string Decrypt(string message, params object[] keys)
     {
-        IStandardCipher cipher = this;
-        return cipher.Decrypt(CipherType, message, keys);
+        return base.Decrypt(CipherType, message, keys);
     }
 }
