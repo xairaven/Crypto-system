@@ -2,15 +2,15 @@
 
 public static class Euclid
 {
-    public static int GCD(int p, int q)
+    public static long GCD(long p, long q)
     {
-        if (q == 0) return p;
+        if (q == 0) return (int) p;
 
         var r = p % q;
         return GCD(q, r);
     }
     
-    public static int ModularReverse(int a, int mod)
+    public static long ModularReverse(long a, long mod)
     {
         for (var x = 1; x < mod; x++)
         {
