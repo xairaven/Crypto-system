@@ -7,85 +7,94 @@
       mc:Ignorable="d"
       Title="KnapsackPage" Height="125" Width="405">
     <DockPanel>
-        <StackPanel Orientation="Horizontal" Margin="5, 0">
-            <Button Style="{StaticResource TransparentButton}"
-                    x:Name="EncryptButton"
-                    Height="65"
-                    IsEnabled="False"
-                    Click="EncryptButton_OnClick">
-                <StackPanel>
-                    <Image
-                        Source="/Resources/Icons/Encryption.png"
-                        Width="32" />
+        <StackPanel Margin="5, 0" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name="EncryptButton"
+                        Height="65"
+                        IsEnabled="False"
+                        Click="EncryptButton_OnClick">
+                    <StackPanel>
+                        <Image
+                            Source="/Resources/Icons/Encryption.png"
+                            Width="32" />
 
-                    <Label Content="Encrypt" FontWeight="SemiBold" />
-                </StackPanel>
-            </Button>
+                        <Label Content="Encrypt" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button>
 
-            <Button Style="{StaticResource TransparentButton}"
-                    x:Name="DecryptButton"
-                    Height="65"
-                    IsEnabled="False"
-                    Click="DecryptButton_OnClick">
-                <StackPanel>
-                    <Image
-                        Source="/Resources/Icons/Decryption.png"
-                        Width="32" />
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name="DecryptButton"
+                        Height="65"
+                        IsEnabled="False"
+                        Click="DecryptButton_OnClick">
+                    <StackPanel>
+                        <Image
+                            Source="/Resources/Icons/Decryption.png"
+                            Width="32" />
 
-                    <Label Content="Decrypt" FontWeight="SemiBold" />
-                </StackPanel>
-            </Button>
+                        <Label Content="Decrypt" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <CheckBox x:Name="ASCIICheckBox"
+                      IsThreeState="False"
+                      IsChecked="True"
+                      Margin="0,10, 0, 0">
+                Is encoding ASCII?
+            </CheckBox>
         </StackPanel>
 
         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
 
         <StackPanel Margin="5">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Secret Key:" 
+                <TextBlock Text="Secret Key:"
                            HorizontalAlignment="Center"
-                           FontWeight="SemiBold"/>
+                           FontWeight="SemiBold" />
                 <TextBox x:Name="SecretSeqBox"
                          MaxHeight="18"
                          Width="160"
                          TextChanged="SecretSeqBox_OnTextChanged"
-                         Margin="5"  />
+                         Margin="5" />
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="T:" 
+                <TextBlock Text="T:"
                            x:Name="TText"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           FontWeight="SemiBold"/>
+                           FontWeight="SemiBold" />
                 <TextBox x:Name="TBox"
                          MaxHeight="18"
                          Width="45"
                          Margin="5"
                          PreviewTextInput="NumericOnly"
-                         TextChanged="TBox_OnTextChanged"/>
-                <TextBlock Text="MOD:" Margin="10,0,0,0" 
+                         TextChanged="TBox_OnTextChanged" />
+                <TextBlock Text="MOD:" Margin="10,0,0,0"
                            x:Name="ModText"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           FontWeight="SemiBold"/>
+                           FontWeight="SemiBold" />
                 <TextBox x:Name="ModBox"
                          MaxHeight="18"
                          Width="45"
                          PreviewTextInput="NumericOnly"
                          Margin="5"
-                         TextChanged="ModBox_OnTextChanged"/>
+                         TextChanged="ModBox_OnTextChanged" />
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Public Key:" 
+                <TextBlock Text="Public Key:"
                            HorizontalAlignment="Center"
                            FontWeight="SemiBold" />
                 <TextBox x:Name="PublicSeqBox"
                          TextChanged="PublicSeqBox_OnTextChanged"
                          MaxHeight="18"
                          Width="160"
-                         Margin="5"  />
+                         Margin="5" />
             </StackPanel>
         </StackPanel>
-        
+
         <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
 
         <StackPanel Margin="5, 0" VerticalAlignment="Center">
@@ -100,7 +109,7 @@
                     <Label Content="Generate keys" FontWeight="SemiBold" />
                 </StackPanel>
             </Button>
-            
+
             <Button Style="{StaticResource TransparentButton}"
                     x:Name="ClearButton"
                     Click="ClearButton_OnClick">

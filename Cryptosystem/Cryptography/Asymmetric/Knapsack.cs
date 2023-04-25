@@ -1,11 +1,42 @@
 ﻿using System;
 using System.Linq;
 using Cryptosystem.Algorithms;
+using Cryptosystem.Utils;
 
 namespace Cryptosystem.Cryptography.Asymmetric;
 
 public class Knapsack
 {
+    public string Encrypt(string message, long[] publicKey, bool isASCII)
+    {
+        var binary = BinaryConverter.StringToBinary(message, 
+            bits: isASCII ? 7 : 16);
+
+        var padding = new string('0', publicKey.Length - (binary.Length % publicKey.Length));
+        binary = string.Concat(binary, padding);
+
+        var bitGroupLength = publicKey.Length;
+
+        var encrypted = new long[binary.Length / publicKey.Length];
+
+        for (int i = 0; i < encrypted.Length; i++)
+        {
+            var bitGroup = binary.Substring(i * bitGroupLength, bitGroupLength);
+            long sum = 0;
+            
+            for (int j = 0; j < bitGroupLength; j++)
+            {
+                var bit = (int) char.GetNumericValue(bitGroup[j]);
+
+                if (bit == 1) sum += publicKey[j];
+            }
+
+            encrypted[i] = sum;
+        }
+
+        return string.Join(", ", encrypted);
+    }
+
     public static long[] GenerateSV(int size)
     {
         var SV = new long[size];

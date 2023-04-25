@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Cryptosystem.Cryptography.Asymmetric;
+using Cryptosystem.Utils;
 
 namespace Cryptosystem.View.Asymmetric;
 
@@ -21,7 +22,22 @@ public partial class KnapsackPage
 
     private void EncryptButton_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            var isASCII = ASCIICheckBox.IsChecked.GetValueOrDefault();
+            
+            ValidateSequence(PublicSeqBox.Text.Trim(), out var publicSequence);
+
+            var message = _textBox.Text;
+            _textBox.Text = new Knapsack().Encrypt(message, publicSequence, isASCII);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message,
+                "Error!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
     }
 
     private void DecryptButton_OnClick(object sender, RoutedEventArgs e)
@@ -33,43 +49,37 @@ public partial class KnapsackPage
     {
         try
         {
-            var SVString = SecretSeqBox.Text.Trim();
-            long[] SV;
-            if (SVString.Equals(""))
+            long[] secretSequence;
+            if (SecretSeqBox.Text.Trim().Equals(""))
             {
-                SV = Knapsack.GenerateSV(new Random().Next(5, 11));
-                SecretSeqBox.Text = string.Join(", ", SV);
+                secretSequence = Knapsack.GenerateSV(new Random().Next(5, 11));
+                SecretSeqBox.Text = string.Join(", ", secretSequence);
             }
-            else ValidateSequence(SVString, out SV);
-
-
-            var modString = ModBox.Text.Trim();
+            else ValidateSequence(SecretSeqBox.Text.Trim(), out secretSequence);
+            
             long mod;
-            if (modString.Equals(""))
+            if (ModBox.Text.Trim().Equals(""))
             {
-                mod = Knapsack.GenerateMod(SV);
+                mod = Knapsack.GenerateMod(secretSequence);
                 ModBox.Text = mod.ToString();
             }
-            else ValidateMod(modString, out mod);
-
-
-            var TString = TBox.Text.Trim();
+            else ValidateNumber(ModBox.Text.Trim(), out mod);
+            
             long T;
-            if (TString.Equals(""))
+            if (TBox.Text.Trim().Equals(""))
             {
                 T = Knapsack.GenerateT(mod);
                 TBox.Text = T.ToString();
             }
-            else ValidateT(TString, out T);
+            else ValidateNumber(TBox.Text.Trim(), out T);
             
-            var PVString = PublicSeqBox.Text.Trim();
-            long[] PV;
-            if (PVString.Equals(""))
+            long[] publicSequence;
+            if (PublicSeqBox.Text.Trim().Equals(""))
             {
-                PV = Knapsack.GeneratePV(SV, T, mod);
-                PublicSeqBox.Text = string.Join(", ", PV);
+                publicSequence = Knapsack.GeneratePV(secretSequence, T, mod);
+                PublicSeqBox.Text = string.Join(", ", publicSequence);
             }
-            else ValidateSequence(PVString, out PV);
+            else ValidateSequence(PublicSeqBox.Text.Trim(), out publicSequence);
         }
         catch (Exception ex)
         {
@@ -144,16 +154,10 @@ public partial class KnapsackPage
         }
     }
 
-    private static void ValidateMod(string modString, out long mod)
+    private static void ValidateNumber(string str, out long number)
     {
-        if (!long.TryParse(modString, out mod))
-            throw new Exception("Variable Mod is not a number");
-    }
-    
-    private static void ValidateT(string modString, out long t)
-    {
-        if (!long.TryParse(modString, out t))
-            throw new Exception("Variable T is not a number");
+        if (!long.TryParse(str, out number))
+            throw new Exception($"Variable {nameof(number)} is not a number");
     }
 
     private void ClearButton_OnClick(object sender, RoutedEventArgs e)
