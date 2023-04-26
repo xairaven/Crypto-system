@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Cryptosystem.Algorithms;
 using Cryptosystem.Utils;
 
@@ -35,6 +36,27 @@ public class Knapsack
         }
 
         return string.Join(", ", encrypted);
+    }
+
+    public string Decrypt(long[] encryptedSequence, long[] secretSequence, long tInverse, long mod, bool isASCII)
+    {
+        var decryptedSequence = new long[encryptedSequence.Length];
+
+        for (int i = 0; i < encryptedSequence.Length; i++)
+        {
+            decryptedSequence[i] = (encryptedSequence[i] * tInverse) % mod;
+        }
+
+        var sb = new StringBuilder();
+        foreach (var num in decryptedSequence)
+        {
+            sb.Append(KnapsackAlg.GetBytes(num, secretSequence));
+        }
+
+        var result = BinaryConverter.BinaryToString(sb.ToString(),
+            bits: isASCII ? 7 : 16);
+        
+        return result;
     }
 
     public static long[] GenerateSV(int size)

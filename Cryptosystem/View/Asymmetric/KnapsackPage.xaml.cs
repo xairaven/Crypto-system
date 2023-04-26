@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Cryptosystem.Cryptography.Asymmetric;
-using Cryptosystem.Utils;
 
 namespace Cryptosystem.View.Asymmetric;
 
@@ -42,7 +41,26 @@ public partial class KnapsackPage
 
     private void DecryptButton_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            var isASCII = ASCIICheckBox.IsChecked.GetValueOrDefault();
+            
+            ValidateSequence(SecretSeqBox.Text.Trim(), out var secretSequence, "the secret sequence");
+            ValidateNumber(TBox.Text.Trim(), out var t);
+            ValidateNumber(ModBox.Text.Trim(), out var mod);
+
+            var tInverse = Knapsack.GenerateTInverse(t, mod);
+            ValidateSequence(_textBox.Text, out var message, "the message");
+            
+            _textBox.Text = new Knapsack().Decrypt(message, secretSequence, tInverse, mod, isASCII);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message,
+                "Error!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
     }
 
     private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
@@ -55,7 +73,7 @@ public partial class KnapsackPage
                 secretSequence = Knapsack.GenerateSV(new Random().Next(5, 11));
                 SecretSeqBox.Text = string.Join(", ", secretSequence);
             }
-            else ValidateSequence(SecretSeqBox.Text.Trim(), out secretSequence);
+            else ValidateSequence(SecretSeqBox.Text.Trim(), out secretSequence, "the secret sequence");
             
             long mod;
             if (ModBox.Text.Trim().Equals(""))
@@ -79,7 +97,7 @@ public partial class KnapsackPage
                 publicSequence = Knapsack.GeneratePV(secretSequence, T, mod);
                 PublicSeqBox.Text = string.Join(", ", publicSequence);
             }
-            else ValidateSequence(PublicSeqBox.Text.Trim(), out publicSequence);
+            else ValidateSequence(PublicSeqBox.Text.Trim(), out publicSequence, "the public sequence");
         }
         catch (Exception ex)
         {
@@ -140,7 +158,7 @@ public partial class KnapsackPage
     [GeneratedRegex(@"^[0-9\-]+$")]
     private static partial Regex MyRegex();
 
-    private static void ValidateSequence(string str, out long[] sequence)
+    private static void ValidateSequence(string str, out long[] sequence, string name = "")
     {
         var stringSequence = str.Split(", ");
 
@@ -148,7 +166,7 @@ public partial class KnapsackPage
         for (int i = 0; i < sequence.Length; i++)
         {
             if (!long.TryParse(stringSequence[i], out var num))
-                throw new ArgumentException("An error occurred while reading the secret sequence.");
+                throw new ArgumentException($"An error occurred while reading {name}.");
             
             sequence[i] = num;
         }

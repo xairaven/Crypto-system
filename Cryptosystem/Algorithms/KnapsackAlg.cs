@@ -5,16 +5,16 @@ namespace Cryptosystem.Algorithms;
 
 public static class KnapsackAlg
 {
-    public static string GetBytes(int S, int[] sequence)
+    public static string GetBytes(long sum, long[] sequence)
     {
         if (!IsSorted(sequence)) Array.Sort(sequence);
 
         var result = "";
         for (int i = sequence.Length - 1; i >= 0; i--)
         {
-            if (sequence[i] <= S)
+            if (sequence[i] <= sum)
             {
-                S -= sequence[i];
+                sum -= sequence[i];
                 result = "1" + result;
             }
             else
@@ -23,12 +23,12 @@ public static class KnapsackAlg
             }
         }
 
-        if (S != 0) throw new EvaluateException("Problem is not solved!");
+        if (sum != 0) throw new EvaluateException("Knapsack problem is not solved!");
         
         return result;
     }
     
-    private static bool IsSorted(int[] sequence)
+    private static bool IsSorted(long[] sequence)
     {
         for (int i = 1; i < sequence.Length; i++)
         {
