@@ -7,7 +7,7 @@ public static class KnapsackAlg
 {
     public static string GetBytes(long sum, long[] sequence)
     {
-        if (!IsSorted(sequence)) Array.Sort(sequence);
+        if (!IsSorted(sequence)) throw new ArgumentException("Sequence is not sorted");
 
         var result = "";
         for (int i = sequence.Length - 1; i >= 0; i--)
