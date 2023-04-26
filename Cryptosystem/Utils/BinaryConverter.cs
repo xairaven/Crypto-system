@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 
 namespace Cryptosystem.Utils;
@@ -27,6 +26,8 @@ public static class BinaryConverter
         
         for (int i = 0; i < binary.Length; i += bits)
         {
+            if (i == binary.Length - (binary.Length % bits)) break;
+            
             var binaryNumber = binary.Substring(i, bits);
 
             var number = Convert.ToInt32(binaryNumber, 2);
