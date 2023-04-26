@@ -24,7 +24,7 @@ public partial class KnapsackPage
         try
         {
             var isASCII = ASCIICheckBox.IsChecked.GetValueOrDefault();
-            
+
             ValidateSequence(PublicSeqBox.Text.Trim(), out var publicSequence);
 
             var message = _textBox.Text;
@@ -44,14 +44,14 @@ public partial class KnapsackPage
         try
         {
             var isASCII = ASCIICheckBox.IsChecked.GetValueOrDefault();
-            
+
             ValidateSequence(SecretSeqBox.Text.Trim(), out var secretSequence, "the secret sequence");
             ValidateNumber(TBox.Text.Trim(), out var t);
             ValidateNumber(ModBox.Text.Trim(), out var mod);
 
             var tInverse = Knapsack.GenerateTInverse(t, mod);
             ValidateSequence(_textBox.Text, out var message, "the message");
-            
+
             _textBox.Text = new Knapsack().Decrypt(message, secretSequence, tInverse, mod, isASCII);
         }
         catch (Exception ex)
@@ -74,7 +74,7 @@ public partial class KnapsackPage
                 SecretSeqBox.Text = string.Join(", ", secretSequence);
             }
             else ValidateSequence(SecretSeqBox.Text.Trim(), out secretSequence, "the secret sequence");
-            
+
             long mod;
             if (ModBox.Text.Trim().Equals(""))
             {
@@ -82,7 +82,7 @@ public partial class KnapsackPage
                 ModBox.Text = mod.ToString();
             }
             else ValidateNumber(ModBox.Text.Trim(), out mod);
-            
+
             long T;
             if (TBox.Text.Trim().Equals(""))
             {
@@ -90,7 +90,7 @@ public partial class KnapsackPage
                 TBox.Text = T.ToString();
             }
             else ValidateNumber(TBox.Text.Trim(), out T);
-            
+
             long[] publicSequence;
             if (PublicSeqBox.Text.Trim().Equals(""))
             {
@@ -135,14 +135,15 @@ public partial class KnapsackPage
 
     private void AreButtonsEnabled()
     {
-        var isEnabled = !_textBox.Text.Trim().Equals("")
-                        && !PublicSeqBox.Text.Trim().Equals("")
-                        && !SecretSeqBox.Text.Trim().Equals("")
-                        && !TBox.Text.Trim().Equals("")
-                        && !ModBox.Text.Trim().Equals("");
+        var isMessageExists = !_textBox.Text.Trim().Equals("");
 
-        EncryptButton.IsEnabled = isEnabled;
-        DecryptButton.IsEnabled = isEnabled;
+        var isEnabledEncrypt = !PublicSeqBox.Text.Trim().Equals("");
+        var isEnabledDecrypt = !SecretSeqBox.Text.Trim().Equals("")
+                               && !TBox.Text.Trim().Equals("")
+                               && !ModBox.Text.Trim().Equals("");
+
+        EncryptButton.IsEnabled = isMessageExists && isEnabledEncrypt;
+        DecryptButton.IsEnabled = isMessageExists && isEnabledDecrypt;
     }
 
     private void NumericOnly(object sender, TextCompositionEventArgs e)
@@ -167,7 +168,7 @@ public partial class KnapsackPage
         {
             if (!long.TryParse(stringSequence[i], out var num))
                 throw new ArgumentException($"An error occurred while reading {name}.");
-            
+
             sequence[i] = num;
         }
     }
@@ -184,5 +185,18 @@ public partial class KnapsackPage
         TBox.Text = "";
         ModBox.Text = "";
         PublicSeqBox.Text = "";
+    }
+
+    private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        var message = "Secret sequence: Must be super increasing.\n" +
+                      "Mod: Random number that greater than sum of secret sequence.\n" +
+                      "T: Random number, that coprime with Mod.\n" +
+                      "Public sequence: Generates by formula depending on SV, Mod, T.";
+
+        MessageBox.Show(messageBoxText: message,
+            caption: "Info",
+            button: MessageBoxButton.OK,
+            icon: MessageBoxImage.Information);
     }
 }
