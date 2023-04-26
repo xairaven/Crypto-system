@@ -94,5 +94,9 @@
       <Resource Include="Resources\Icons\Generate.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\Info.png" />
+      <Resource Include="Resources\Icons\Info.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>
