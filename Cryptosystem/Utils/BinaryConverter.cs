@@ -31,7 +31,10 @@ public static class BinaryConverter
             var binaryNumber = binary.Substring(i, bits);
 
             var number = Convert.ToInt32(binaryNumber, 2);
-
+            
+            // fix - padding may take way more bits than 7
+            if (number == 0) continue;
+            
             sb.Append((char) number);
         }
 
