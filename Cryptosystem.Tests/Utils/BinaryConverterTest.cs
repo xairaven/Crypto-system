@@ -59,4 +59,18 @@ public class BinaryConverterTest
         // Result
         Assert.Equal(expected, result);
     }
+    
+    [Fact]
+    public void TestBinaryToString_WithPadding()
+    {
+        // Arrange
+        const string expected = "BAG";
+        const string input = "1000010100000110001110000";
+
+        // Act
+        var result = BinaryConverter.BinaryToString(input, 7);
+
+        // Result
+        Assert.Equal(expected, result);
+    }
 }

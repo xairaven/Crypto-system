@@ -48,4 +48,10 @@ public class EuclidTest
     {
         Assert.Equal(12, Euclid.ModularReverse(10, 17));
     }
+    
+    [Fact]
+    public void TestModularReverse4()
+    {
+        Assert.Equal(1, Euclid.ModularReverse(2, 2));
+    }
 }
