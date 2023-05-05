@@ -12,6 +12,7 @@ public enum CipherEnum
     Knapsack,
     LitFrag,
     OneTimePad,
+    RSA,
     TripleDES,
     Trithemius,
     TrithemiusBruteforce,

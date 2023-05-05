@@ -36,6 +36,7 @@ public partial class MainWindow : Window
             new KnapsackPage(this),
             new LitFragPage(this),
             new OneTimePadPage(this),
+            new RSAPage(this),
             new TripleDESPage(this),
             new TrithemiusPage(this),
             new TrithemiusBruteforcePage(this),
