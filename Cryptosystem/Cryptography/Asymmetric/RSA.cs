@@ -6,18 +6,18 @@ namespace Cryptosystem.Cryptography.Asymmetric;
 
 public class LocalRSA
 {
-    private readonly int _keySize;
     private readonly RSAEncryptionPadding _padding;
 
-    public LocalRSA(int size = 2048, RSAEncryptionPadding? padding = null)
+    private readonly RSAEncryptionPadding DefaultPadding = RSAEncryptionPadding.OaepSHA256;
+    
+    public LocalRSA(RSAEncryptionPadding? padding = null)
     {
-        _keySize = size;
-        _padding = padding ?? RSAEncryptionPadding.OaepSHA256;
+        _padding = padding ?? DefaultPadding;
     }
 
     public string Encrypt(string message, string publicKey)
     {
-        using var provider = RSA.Create(_keySize);
+        using var provider = RSA.Create();
         
         provider.ImportFromPem(publicKey);
 
@@ -29,7 +29,7 @@ public class LocalRSA
 
     public string Decrypt(string encryptedMessage, string privateKey)
     {
-        using var provider = RSA.Create(_keySize);
+        using var provider = RSA.Create();
         
         provider.ImportFromPem(privateKey);
 
