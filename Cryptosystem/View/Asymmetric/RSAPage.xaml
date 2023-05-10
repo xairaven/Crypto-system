@@ -4,11 +4,168 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptosystem.View.Asymmetric"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      xmlns:enum1="clr-namespace:Cryptosystem.Enum"
       mc:Ignorable="d"
       Title="RSAPage" Height="125" Width="405">
-    <Grid>
-        <TextBlock Text="Work in Progress!"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontSize="24" FontWeight="Bold"/>
-    </Grid>
+    <Page.Resources>
+        <ObjectDataProvider x:Key="PaddingModeList" MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum1:RSAPaddingMode" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+
+    <DockPanel>
+        <StackPanel Margin="5, 0" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  >
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name="EncryptButton"
+                        Height="80"
+                        IsEnabled="False"
+                        Click="EncryptButton_OnClick">
+                    <StackPanel>
+                        <Image
+                            Source="/Resources/Icons/Encryption.png"
+                            Width="32" />
+
+                        <Label Content="Encrypt" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource TransparentButton}"
+                        x:Name="DecryptButton"
+                        Height="80"
+                        IsEnabled="False"
+                        Click="DecryptButton_OnClick">
+                    <StackPanel>
+                        <Image
+                            Source="/Resources/Icons/Decryption.png"
+                            Width="32" />
+
+                        <Label Content="Decrypt" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            
+            <Button Margin="0, 5" 
+                    Height="20" 
+                    Background="#8BB7F0"
+                    Click="HelpButton_OnClick">
+                <Image
+                    Source="/Resources/Icons/Info.png"
+                    Width="32" />
+            </Button>
+        </StackPanel>
+
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Text="Key Size:" FontWeight="Bold" HorizontalAlignment="Center" />
+
+                <TextBox
+                    x:Name="KeySizeBox"
+                    Margin="0, 5"
+                    Width="75"
+                    PreviewTextInput="NumericOnly" />
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                <TextBlock Text="Padding:" FontWeight="Bold" HorizontalAlignment="Center" />
+                <ComboBox
+                    ItemsSource="{Binding Source={StaticResource PaddingModeList}}"
+                    x:Name="PaddingCombo"
+                    Margin="0, 5"
+                    Width="75"
+
+                    SelectionChanged="PaddingModeChanged" />
+            </StackPanel>
+        </StackPanel>
+
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5 0 ">
+            <StackPanel Margin="0 10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Public Key"
+                               FontWeight="Bold"
+                               Margin="0 0 10 0" />
+                    <Button Style="{StaticResource TransparentButton}"
+                            Click="OpenKeyButton_OnClick">
+                        <Image
+                            Source="/Resources/Icons/Open.png"
+                            Width="16" />
+                    </Button>
+                    <Button Style="{StaticResource TransparentButton}"
+                            Click="SaveKeyButton_OnClick">
+                        <Image
+                            Source="/Resources/Icons/Save.png"
+                            Width="16" />
+                    </Button>
+                </StackPanel>
+
+                <TextBox x:Name="PublicKeyHash"
+                         IsEnabled="False" IsReadOnly="True"
+                         HorizontalAlignment="Center"
+                         Margin=" 0 5 "
+                         Width="110" />
+            </StackPanel>
+
+            <StackPanel Margin="0 10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Secret Key"
+                               FontWeight="Bold"
+                               Margin="0 0 10 0" />
+                    <Button Style="{StaticResource TransparentButton}"
+                            Click="OpenKeyButton_OnClick">
+                        <Image
+                            Source="/Resources/Icons/Open.png"
+                            Width="16" />
+                    </Button>
+                    <Button Style="{StaticResource TransparentButton}"
+                            Click="SaveKeyButton_OnClick">
+                        <Image
+                            Source="/Resources/Icons/Save.png"
+                            Width="16" />
+                    </Button>
+                </StackPanel>
+
+                <TextBox x:Name="SecretKeyHash"
+                         IsEnabled="False" IsReadOnly="True"
+                         HorizontalAlignment="Center"
+                         Margin=" 0 5 "
+                         Width="110" />
+            </StackPanel>
+        </StackPanel>
+
+        <Rectangle VerticalAlignment="Stretch" Width="1" Margin="0" Stroke="DarkGray" />
+        
+        <StackPanel VerticalAlignment="Center">
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name="GenerateButton"
+                    Click="GenerateButton_OnClick">
+                <StackPanel>
+                    <Image
+                        Source="/Resources/Icons/Generate.png"
+                        Width="24" />
+                    <Label Content="Generate" 
+                           FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource TransparentButton}"
+                    x:Name="ClearButton"
+                    Click="ClearButton_OnClick">
+                <StackPanel>
+                    <Image
+                        Source="/Resources/Icons/Clear.png"
+                        Width="24" />
+
+                    <Label Content="Clear" FontWeight="SemiBold" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </DockPanel>
 </Page>
