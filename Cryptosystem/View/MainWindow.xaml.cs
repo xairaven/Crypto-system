@@ -31,7 +31,6 @@ public partial class MainWindow : Window
             new CaesarPage(this),
             new CaesarBruteforcePage(this),
             new DESPage(this),
-            new DiffieHellmanPage(this),
             new HexPage(this),
             new KnapsackPage(this),
             new LitFragPage(this),

@@ -7,7 +7,6 @@ public enum CipherEnum
     Caesar,
     CaesarBruteForce,
     DES,
-    DiffieHellman,
     Hexadecimal,
     Knapsack,
     LitFrag,
