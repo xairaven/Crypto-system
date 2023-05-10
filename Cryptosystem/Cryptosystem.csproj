@@ -98,5 +98,13 @@
       <Resource Include="Resources\Icons\Info.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Icons\Open.png" />
+      <Resource Include="Resources\Icons\Open.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Icons\Save.png" />
+      <Resource Include="Resources\Icons\Save.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 </Project>
