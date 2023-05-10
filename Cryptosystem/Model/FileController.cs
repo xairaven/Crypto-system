@@ -8,12 +8,12 @@ namespace Cryptosystem.Model;
 
 public class FileController : IFileController
 {
-    public FileInfo Open()
+    public FileInfo Open(string filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*")
     {
         var openDialog = new OpenFileDialog()
         {
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments),
-            Filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*"
+            Filter = filter
         };
 
         if (!openDialog.ShowDialog() == true)
@@ -28,9 +28,15 @@ public class FileController : IFileController
     {
         if (text.Trim().Equals("")) return;
 
-        if (fileInfo.Extension.Equals(".txt"))
+        var extension = fileInfo.Extension;
+        
+        if (extension.Equals(".txt"))
         {
             File.WriteAllText(fileInfo.FullName, text, Encoding.Unicode);
+        }
+        else if (extension.Equals(".pem"))
+        {
+            File.WriteAllBytes(fileInfo.FullName, Encoding.ASCII.GetBytes(text));
         }
         else
         {
@@ -38,12 +44,13 @@ public class FileController : IFileController
         }
     }
 
-    public FileInfo SaveAs(string text)
+    public FileInfo SaveAs(string text, 
+        string filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*")
     {
         var saveDialog = new SaveFileDialog()
         {
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments),
-            Filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*"
+            Filter = filter
         };
         
         if (!saveDialog.ShowDialog() == true)
@@ -52,10 +59,16 @@ public class FileController : IFileController
         }
 
         var fileInfo = new FileInfo(saveDialog.FileName);
+
+        var extension = fileInfo.Extension;
         
-        if (fileInfo.Extension.Equals(".txt"))
+        if (extension.Equals(".txt"))
         {
             File.WriteAllText(fileInfo.FullName, text, Encoding.Unicode);
+        }
+        else if (extension.Equals(".pem"))
+        {
+            File.WriteAllBytes(fileInfo.FullName, Encoding.ASCII.GetBytes(text));
         }
         else
         {

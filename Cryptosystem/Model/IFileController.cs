@@ -7,7 +7,8 @@ namespace Cryptosystem.Model;
 
 public interface IFileController
 {
-    FileInfo Open();
+    FileInfo Open(string filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*");
     void Save(FileInfo fileInfo, string textBox);
-    FileInfo SaveAs(string text);
+    FileInfo SaveAs(string text, 
+        string filter = "Text files (*.txt)|*.txt;|All files (*.*)|*.*");
 }
